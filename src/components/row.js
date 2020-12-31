@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 import axios from '../services/axios'
 import PropTypes from 'prop-types'
 
@@ -8,6 +8,7 @@ const Row = ({ title, fetchUrl }) => {
     'https://www.danielwellington.com/media/staticbucket/media/catalog/product'
   const history = useHistory()
   const [products, setProducts] = useState([])
+  const regex = / /gi
 
   useEffect(() => {
     const token = localStorage.getItem('token')
@@ -35,7 +36,14 @@ const Row = ({ title, fetchUrl }) => {
       {products.map(product => (
         <div key={product._id}>
           <p>
-            {product.title}, {product.price}$
+            <Link
+              to={`/detail/${product.title
+                .replace(regex, '-')
+                .toLowerCase()}}/${product._id}`}
+            >
+              {product.title}
+            </Link>
+            , {product.price}$
           </p>
           <p> couleur: {product.color[0]} </p>
           <p> {product.backdrop_path} </p>
