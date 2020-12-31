@@ -16,7 +16,7 @@ const RegisterLogin = () => {
 
   useEffect(() => {
     let token = localStorage.getItem('token')
-    if (token) history.push('/chains')
+    if (token) history.push('/home')
     console.log(token)
   }, [])
 
