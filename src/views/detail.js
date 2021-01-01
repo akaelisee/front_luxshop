@@ -8,6 +8,7 @@ import BtnLibrary from '../components/btnLibrary'
 import axios from '../services/axios'
 import request from '../services/requests'
 import { addLibrary, removeLibrary } from '../actions/library'
+import Card from '../components/card'
 const Detail = ({ library }) => {
   // @ts-ignore
   const [product, setProduct] = useState([])
@@ -65,6 +66,7 @@ const Detail = ({ library }) => {
       <br />
       <br />
       <div>
+        <Card productId={product.id || product._id} />
         <button> Ajouer au panier </button>
       </div>
       <br />
