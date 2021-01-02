@@ -5,7 +5,8 @@ const Requests = {
   fetchBracelets: `api/bracelets/`,
   fetchWatches: `api/watches/`,
   fetchNecklaces: `api/necklaces/`,
-  fetchOrder: `api/order/`,
+  fetchOrder: `api/orders/`,
+  fetchAddOrder: `api/add/orders`,
   fetchRegister: `api/register/`,
   fetchLogin: `api/login/`
 }

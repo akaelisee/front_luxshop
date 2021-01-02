@@ -16,6 +16,7 @@ import Bracelets from '../views/bracelets'
 import Watches from '../views/watches'
 import Detail from '../views/detail'
 import Library from '../views/library'
+import CardPage from '../views/cardPage'
 
 const Routes = () => {
   return (
@@ -51,6 +52,7 @@ const Routes = () => {
             path='/library'
             component={Library}
           ></PrivateRoute>
+          <PrivateRoute exact path='/card' component={CardPage}></PrivateRoute>
         </Content>
       </Switch>
     </Router>

@@ -9,7 +9,8 @@ const NavBar = () => {
         <Link to='/rings'> Bagues </Link> |
         <Link to='/chains'> Boucle d&lsquo;oreilles </Link> |
         <Link to='/necklaces'> Collier </Link> |
-        <Link to='/library'> mes produits </Link>
+        <Link to='/library'> mes produits </Link> |
+        <Link to='/card'> Card </Link>
       </div>
     </div>
   )

@@ -14,9 +14,11 @@ const Detail = ({ library }) => {
   const [product, setProduct] = useState([])
   const [poster, setPoster] = useState([])
   const fetchUrl = `${request.fetchProducts}/`
+  const fetchUrlOrder = request.fetchAddOrder
+  const token = localStorage.getItem('token')
   const param = useParams()
+  const [order, setOrder] = useState({ productId: param?.id || param?._id })
   useEffect(() => {
-    const token = localStorage.getItem('token')
     axios
       // @ts-ignore
       .get(`${fetchUrl}${param?.id || param?._id}`, {
@@ -40,6 +42,26 @@ const Detail = ({ library }) => {
     )
   }
 
+  const handleSubmit = e => {
+    e.preventDefault()
+    const data = {
+      productId: order.productId
+    }
+
+    axios
+      .post(fetchUrlOrder, data, {
+        headers: {
+          'auth-token': token
+        }
+      })
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
   return (
     <div>
       <div> Titre : {product.title} </div>
@@ -48,7 +70,7 @@ const Detail = ({ library }) => {
       <br />
       <div> Description : {product.overview} </div>
       <br />
-      <div> mmtiére : {product.matter} </div>
+      <div> matiére : {product.matter} </div>
       <br />
       <div> Ref : {product.reference} </div>
       <div> longueur_ajustable : {product?.adjustable_length} </div>
@@ -66,8 +88,17 @@ const Detail = ({ library }) => {
       <br />
       <br />
       <div>
-        <Card productId={product.id || product._id} />
-        <button> Ajouer au panier </button>
+        <form onSubmit={handleSubmit}>
+          <input
+            type='text'
+            name='productId'
+            value={order.productId}
+            // @ts-ignore
+            onChange={e => setOrder(e.target.value)}
+            hidden
+          />
+          <button> Ajouter au panier </button>
+        </form>
       </div>
       <br />
       <br />
