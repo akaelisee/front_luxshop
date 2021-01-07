@@ -8,8 +8,9 @@ import BtnLibrary from '../components/btnLibrary'
 import axios from '../services/axios'
 import request from '../services/requests'
 import { addLibrary, removeLibrary } from '../actions/library'
-import Card from '../components/card'
-const Detail = ({ library }) => {
+import { addCard } from '../actions/cardAction'
+import BtnCard from '../components/btnCard'
+const Detail = ({ library, cardReducers }) => {
   // @ts-ignore
   const [product, setProduct] = useState([])
   const [poster, setPoster] = useState([])
@@ -97,7 +98,6 @@ const Detail = ({ library }) => {
             onChange={e => setOrder(e.target.value)}
             hidden
           />
-          <button> Ajouter au panier </button>
         </form>
       </div>
       <br />
@@ -108,17 +108,21 @@ const Detail = ({ library }) => {
           removeLibrary={removeLibrary(product)}
           existsInLibrary={existsInLibrary}
         />
+        <hr />
+        <BtnCard addCard={addCard(product)} />
       </div>
     </div>
   )
 }
 
 Detail.propTypes = {
-  library: PropTypes.any
+  library: PropTypes.any,
+  cardReducers: PropTypes.any
 }
 
 const mapStateToProps = state => ({
-  library: state.library.productLibrary
+  library: state.library.productLibrary,
+  cardReducers: state.cardReducers.productCard
 })
 
 export default connect(mapStateToProps)(Detail)

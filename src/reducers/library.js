@@ -1,4 +1,4 @@
-import update from 'react-addons-update'
+/* eslint-disable no-case-declarations */
 import { ADD_LIBRARY, REMOVE_LIBRARY } from '../actions/library'
 
 const initialState = {

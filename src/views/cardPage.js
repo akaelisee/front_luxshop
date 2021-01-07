@@ -1,99 +1,76 @@
-import React, { useState, useEffect } from 'react'
-import axios from '../services/axios'
-import request from '../services/requests'
+import React, { useState } from 'react'
 import { useHistory, Redirect } from 'react-router-dom'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { removeCard } from '../actions/cardAction'
+import { IncrementQty, DecrementQty } from '../actions/qty'
+import Checkout from '../components/checkout'
+import { Elements, CardElement } from '@stripe/react-stripe-js'
+import { loadStripe } from '@stripe/stripe-js'
 
-const CardPage = () => {
-  const fetchUrl = request.fetchOrder
-  const [cards, setCards] = useState([])
-  const [cardOrder, setCardOrder] = useState([])
-  const [totalPrice, setTotalPrice] = useState([])
-  const [qty, setQty] = useState('')
-  const token = localStorage.getItem('token')
-  const history = useHistory()
+const CardPage = ({ cardReducers }) => {
+  const [visible, setVisible] = useState(false)
+  const stripePromise = loadStripe(
+    'pk_test_51GqOG8FA3iluNmXdqfzRsQvPFoFwIndJ0X36FnbE4FP4UrIEb5kU73CqgkavOj796IvGD7pi3n7QOFbLehyo6o5b009INJQZWD'
+  )
+  const dispatch = useDispatch()
 
-  useEffect(() => {
-    axios
-      // @ts-ignore
-      .get(fetchUrl, {
-        headers: {
-          'auth-token': token
-        }
-      })
-      .then(res => {
-        setCards(res.data)
-        setCardOrder(res.data.Order)
-        const response = {
-          t: res.data.Order.map(item => {
-            return item.quantity
-          })
-        }
-
-        const groupPrice = {
-          t: res.data.Order.map(item => {
-            return item.product.price
-          })
-        }
-        // @ts-ignore
-        setQty(response)
-        setTotalPrice(groupPrice.t)
-      })
-      // @ts-ignore
-      .catch(err => {
-        console.log(err)
-      })
-  }, [fetchUrl])
-
-  // delete
-  const handleDelete = id => {
-    axios
-      // @ts-ignore
-      .delete(`${fetchUrl}${id}`, {
-        headers: {
-          'auth-token': token
-        }
-      })
-      .then(res => {
-        console.log(res)
-      })
-      // @ts-ignore
-      .catch(err => {
-        console.log(err)
-      })
+  const sum = () => {
+    let total = 0
+    cardReducers.forEach(element => {
+      total += element.qty * element.price
+    })
+    return total
   }
 
-  const qtyFunc = price => {}
-
-  const next = () => {
-    const ab = qty + 1
-    return ab
-  }
-
-  const funcPrice = () => {
-    // const total = totalPrice.reduce((total, item) => total + item)
-    // return total
+  const handleVisible = () => {
+    if (!visible) {
+      return <></>
+    } else {
+      return (
+        <>
+          <Elements stripe={stripePromise}>
+            <Checkout cards={cardReducers} />
+          </Elements>
+        </>
+      )
+    }
   }
 
   return (
     <div>
-      <p> Count : {cards.count} product</p>
-      <div>
-        {cardOrder.map(card => (
-          <div key={card.id || card._id}>
-            <p>
-              titte: {card.product.title} | quantity : <button> - </button>
-              {card.quantity} <button onClick={() => next()}> + </button> ||
-              <button onClick={() => handleDelete(card.id || card._id)}>
-                supprimer
-              </button>
-            </p>
-            <p> price: {card.product.price}</p>
-          </div>
-        ))}
-      </div>
-      <p> total prix : {funcPrice()} </p>
+      <p> count : {cardReducers.length}</p>
+      {cardReducers.map(product => (
+        <div key={product.id || product._id}>
+          <p>
+            {product.title} || {product.price} euro ||
+            <button onClick={() => dispatch(DecrementQty(product.id))}>
+              -
+            </button>{' '}
+            {product.qty}{' '}
+            <button onClick={() => dispatch(IncrementQty(product.id))}>
+              +
+            </button>{' '}
+            ||
+            <button onClick={() => dispatch(removeCard(product))}>
+              Supprimer
+            </button>
+          </p>
+        </div>
+      ))}
+      <button onClick={() => setVisible(true)}> Pay {sum()} </button>
+      {handleVisible()}
     </div>
   )
 }
 
-export default CardPage
+CardPage.propTypes = {
+  cardReducers: PropTypes.array
+}
+
+const mapStateToProps = state => ({
+  cardReducers: state.cardReducers.productCard
+})
+
+export default connect(mapStateToProps)(CardPage)

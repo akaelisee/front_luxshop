@@ -18,10 +18,12 @@ const BtnLibrary = ({ addLibrary, removeLibrary, existsInLibrary }) => {
   }
   return (
     <div>
-      {exist ? (
-        <button onClick={() => dispatch(handleRemove)}> Supprimer </button>
+      {!exist ? (
+        <button onClick={() => dispatch(handleAdd)}> Sauvegardez </button>
       ) : (
-        <button onClick={() => dispatch(handleAdd)}> Ajouter </button>
+        <button onClick={() => dispatch(handleRemove)}>
+          Supprimer la sauvegarde
+        </button>
       )}
     </div>
   )
