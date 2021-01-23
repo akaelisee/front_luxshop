@@ -17,6 +17,10 @@ import Watches from '../views/watches'
 import Detail from '../views/detail'
 import Library from '../views/library'
 import CardPage from '../views/cardPage'
+import Account from '../views/account'
+import ProductHer from '../views/productHer'
+import ProductHim from '../views/productHim'
+import Contact from '../views/contact'
 
 const Routes = () => {
   return (
@@ -27,6 +31,11 @@ const Routes = () => {
           <PrivateRoute exact path='/home' component={Home}></PrivateRoute>
           <PrivateRoute exact path='/chains' component={Chains}></PrivateRoute>
           <PrivateRoute exact path='/rings' component={Rings}></PrivateRoute>
+          <PrivateRoute
+            exact
+            path='/account'
+            component={Account}
+          ></PrivateRoute>
           <PrivateRoute
             exact
             path='/necklaces'
@@ -53,6 +62,21 @@ const Routes = () => {
             component={Library}
           ></PrivateRoute>
           <PrivateRoute exact path='/card' component={CardPage}></PrivateRoute>
+          <PrivateRoute
+            exact
+            path='/looks-for-her'
+            component={ProductHer}
+          ></PrivateRoute>
+          <PrivateRoute
+            exact
+            path='/looks-for-him'
+            component={ProductHim}
+          ></PrivateRoute>
+          <PrivateRoute
+            exact
+            path='/contact'
+            component={Contact}
+          ></PrivateRoute>
         </Content>
       </Switch>
     </Router>

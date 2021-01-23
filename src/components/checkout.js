@@ -1,3 +1,5 @@
+// @ts-nocheck
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react'
 // import axios from '../services/axios'
 import axios from 'axios'
@@ -6,18 +8,18 @@ import { useHistory } from 'react-router-dom'
 // import StripeCheckout from 'react-stripe-checkout'
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
 
-const Checkout = ({ cards }) => {
-  const fetchUrl = request.fetchOrder
+const Checkout = ({ cards, total, verified }) => {
   const [isProcessing, setIsProcessing] = useState(false)
   const [checkoutErrorMsg, setCheckoutErrorMsg] = useState('')
   const [buttonMsg, setButtonMsg] = useState('Pay')
+  const [verifiedMsg, setVerifiedMsg] = useState('')
   const element = useElements()
   const token = localStorage.getItem('token')
   const stripe = useStripe()
-  const elements = useElements()
-  const history = useHistory()
 
-  useEffect(() => {}, [])
+  useEffect(() => {
+    console.log(verified.email)
+  }, [])
 
   const handleChange = e => {
     if (e.error) {
@@ -25,6 +27,7 @@ const Checkout = ({ cards }) => {
     }
     setCheckoutErrorMsg('')
   }
+
   const handlePayment = async e => {
     // Block native form submission.
     e.preventDefault()
@@ -45,22 +48,14 @@ const Checkout = ({ cards }) => {
       }
     }
 
-    const price = cards.map(item => {
-      return item.price
-    })
-
-    const title = cards.map(item => {
-      return item.title
-    })
-
     try {
       // Got our client secret
       const paymentIntent = await axios.post(
         'http://localhost:5000/api/payment',
         {
           // @ts-ignore
-          amount: price.join() * 100,
-          description: title.join()
+          amount: total() * 100,
+          receipt_email: e.target.email.value
         },
         {
           headers: {
@@ -100,13 +95,12 @@ const Checkout = ({ cards }) => {
 
       setButtonMsg('Success! Payment is Complete')
 
-      // setTimeout(() => {
-      //   setButtonMsg('Pay')
-      //   setIsProcessing(false)
-      // }, 2000)
+      setTimeout(() => {
+        setButtonMsg('Pay')
+        setIsProcessing(false)
+      }, 2000)
 
-      console.log(paymentMethodObj)
-      console.log(confirmPayment)
+      console.log(confirmPayment.paymentIntent.status)
     } catch (error) {
       setCheckoutErrorMsg(error.message)
       setIsProcessing(false)
@@ -141,8 +135,16 @@ const Checkout = ({ cards }) => {
             }
           }}
         />
-        <button type='submit'>pay</button>
+        <button type='submit' disabled={isProcessing}>
+          {buttonMsg}
+        </button>
       </form>
+      <hr />
+      {cards.map(item => (
+        <div key={item.id}>
+          <p> {item.title} </p>{' '}
+        </div>
+      ))}
     </div>
   )
 }

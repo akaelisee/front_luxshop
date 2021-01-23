@@ -2,45 +2,58 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-const Login = ({ submitLogin, errorMessageChamps }) => {
+// style
+import FormIn from '../../styles/FormIn'
+
+const Login = ({ submitLogin, errorMessageChamps, errorMessageLogin }) => {
   const [formLogin, setFormLogin] = useState({
     email: '',
     password: ''
   })
 
   return (
-    <div>
+    <FormIn>
+      <div
+        style={{
+          color: '#ec2f4d',
+          fontSize: '14px',
+          marginBottom: '5px'
+        }}
+      >
+        {errorMessageChamps}
+        {errorMessageLogin}
+      </div>
       <form onSubmit={e => submitLogin(e, formLogin)}>
-        <p>
-          email :{' '}
+        <div className='form-group'>
           <input
             type='email'
             name='email'
+            placeholder='Email'
             onChange={e =>
               setFormLogin({ ...formLogin, email: e.target.value })
             }
           />
-        </p>
-        <p>
-          mdp :{' '}
+        </div>
+        <div className='form-group'>
           <input
             type='password'
             name='password'
+            placeholder='Mot de passe'
             onChange={e =>
               setFormLogin({ ...formLogin, password: e.target.value })
             }
           />
-        </p>
-        <button> valider </button>
-      </form>{' '}
-      <p> {errorMessageChamps} </p>
-    </div>
+        </div>
+        <button className='btn_login'> Se connecter </button>
+      </form>
+    </FormIn>
   )
 }
 
 Login.propTypes = {
   submitLogin: PropTypes.func,
-  errorMessageChamps: PropTypes.string
+  errorMessageChamps: PropTypes.string,
+  errorMessageLogin: PropTypes.string
 }
 
 export default Login

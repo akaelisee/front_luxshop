@@ -1,9 +1,11 @@
 // @ts-nocheck
 import { combineReducers } from 'redux'
-// @ts-ignore
 import library from './library'
 import cardReducers from './cardReducers'
+import login from './login'
+
 export default combineReducers({
   library,
-  cardReducers
+  cardReducers,
+  login
 })

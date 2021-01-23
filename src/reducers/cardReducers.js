@@ -52,7 +52,12 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         productCard: state.productCard.map(item => {
-          return { ...item, qty: item.qty == 1 ? item.qty : item.qty - 1 }
+          // { ...item, qty: item.qty == 1 ? item.qty : item.qty - 1 }
+          if (item.id === action.payload.id) {
+            return { ...item, qty: item.qty == 1 ? item.qty : item.qty - 1 }
+          } else {
+            return { ...item }
+          }
         })
       }
     default:

@@ -1,15 +1,15 @@
+// @ts-nocheck
 import React, { useState } from 'react'
-import { useHistory, Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { removeCard } from '../actions/cardAction'
 import { IncrementQty, DecrementQty } from '../actions/qty'
 import Checkout from '../components/checkout'
-import { Elements, CardElement } from '@stripe/react-stripe-js'
+import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 
-const CardPage = ({ cardReducers }) => {
+const CardPage = ({ cardReducers, login }) => {
   const [visible, setVisible] = useState(false)
   const stripePromise = loadStripe(
     'pk_test_51GqOG8FA3iluNmXdqfzRsQvPFoFwIndJ0X36FnbE4FP4UrIEb5kU73CqgkavOj796IvGD7pi3n7QOFbLehyo6o5b009INJQZWD'
@@ -31,7 +31,7 @@ const CardPage = ({ cardReducers }) => {
       return (
         <>
           <Elements stripe={stripePromise}>
-            <Checkout cards={cardReducers} />
+            <Checkout total={sum} verified={login} cards={cardReducers} />
           </Elements>
         </>
       )
@@ -66,11 +66,13 @@ const CardPage = ({ cardReducers }) => {
 }
 
 CardPage.propTypes = {
-  cardReducers: PropTypes.array
+  cardReducers: PropTypes.array,
+  login: PropTypes.object
 }
 
 const mapStateToProps = state => ({
-  cardReducers: state.cardReducers.productCard
+  cardReducers: state.cardReducers.productCard,
+  login: state.login.userLogin
 })
 
 export default connect(mapStateToProps)(CardPage)
