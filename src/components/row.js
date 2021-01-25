@@ -1,8 +1,11 @@
 // @ts-nocheck
 import React, { useState, useEffect } from 'react'
-import { useHistory, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import axios from '../services/axios'
 import PropTypes from 'prop-types'
+// component
+import { Loader } from '../components/loader'
+// style
 import Banniere from '../styles/Banniere'
 import Container from '../styles/Container'
 import Col from '../styles/Col'
@@ -11,15 +14,14 @@ import { Card, Image, CardBody } from '../styles/Card'
 
 const Row = ({ title, fetchUrl, banniereImage, secondText, thridText }) => {
   const baseImage = process.env.REACT_APP_BASE_IMAGE
-
-  const history = useHistory()
   const [products, setProducts] = useState([])
+  const [isLoader, setIsLoader] = useState(false)
   const regex = / /gi
 
   useEffect(() => {
     const token = localStorage.getItem('token')
     async function fetchData() {
-      const request = await axios
+      await axios
         .get(fetchUrl, {
           headers: {
             'auth-token': token
@@ -27,14 +29,18 @@ const Row = ({ title, fetchUrl, banniereImage, secondText, thridText }) => {
         })
         .then(res => {
           setProducts(res.data.results)
+          setIsLoader(true)
         })
-        // @ts-ignore
         .catch(err => {
           console.log(err)
         })
     }
     fetchData()
   }, [fetchUrl])
+
+  if (!isLoader) {
+    return <Loader />
+  }
   return (
     <Container>
       <Col>

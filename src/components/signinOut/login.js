@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
-
 // style
 import FormIn from '../../styles/FormIn'
 
@@ -20,7 +18,17 @@ const Login = ({ submitLogin, errorMessageChamps, errorMessageLogin }) => {
           marginBottom: '5px'
         }}
       >
-        {errorMessageChamps}
+        {formLogin.email.length > 0 && formLogin.password.length > 0
+          ? ''
+          : errorMessageChamps}
+      </div>
+      <div
+        style={{
+          color: '#ec2f4d',
+          fontSize: '14px',
+          marginBottom: '5px'
+        }}
+      >
         {errorMessageLogin}
       </div>
       <form onSubmit={e => submitLogin(e, formLogin)}>

@@ -35,7 +35,7 @@ const Container = styled.div`
       `
     } else if (props.detail) {
       return `
-        padding-top: 115px;
+        padding-top: 125px;
       `
     }
   }}

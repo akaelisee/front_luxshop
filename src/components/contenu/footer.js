@@ -2,12 +2,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { LogoFooter } from '../components/logo'
+import { LogoFooter } from '../logo'
 // assets images
-import Cb from '../assets/img/carte-bancaire-2x.png'
-import Master from '../assets/img/mastercard-2x.png'
-import Maestro from '../assets/img/maestro-2x.png'
-import PayPal from '../assets/img/paypal-2x.png'
+import Cb from '../../assets/img/carte-bancaire-2x.png'
+import Master from '../../assets/img/mastercard-2x.png'
+import Maestro from '../../assets/img/maestro-2x.png'
+import PayPal from '../../assets/img/paypal-2x.png'
 const Footer = () => {
   return (
     <Foot>

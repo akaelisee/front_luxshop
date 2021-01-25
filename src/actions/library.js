@@ -13,6 +13,6 @@ export const addLibrary = product => ({
 export const removeLibrary = product => ({
   type: REMOVE_LIBRARY,
   payload: {
-    product: product.id || product._id
+    product: product
   }
 })

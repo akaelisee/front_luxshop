@@ -1,5 +1,25 @@
 // @ts-nocheck
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+
+const PageLeft = keyframes`
+  from {
+    transform: translate(-100%, 0%);
+  }
+
+  to {
+    transform: translate(0%, 0%);
+  }
+`
+
+const PageRight = keyframes`
+  from {
+    transform: translate(0%, 0%);
+  }
+
+  to {
+    transform: translate(-100%, 0%);
+  }
+`
 
 const NavLink = styled.div`
   text-align: center;
@@ -55,6 +75,74 @@ const NavLink = styled.div`
       `
     }
   }}
+
+  @media screen and (max-width: 850px) {
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 75%;
+    animation: ${PageLeft} 0.2s linear;
+    background-color: rgba(7, 17, 32, 0.878);
+
+    .nav__responsive {
+      padding: 5px 0;
+      text-align: left;
+      .close__responsive {
+        font-size: 30px;
+        color: #fff;
+        margin-left: 45px;
+        cursor: pointer;
+      }
+    }
+    .nav__link {
+      display: flex;
+      flex-direction: column;
+      margin: 25px 0;
+      a {
+        text-decoration: none;
+        display: inline-block;
+        padding: 13px 15px;
+        text-transform: uppercase;
+        font-size: 16px;
+        letter-spacing: 1px;
+        color: rgba(255, 255, 255, 0.904);
+        position: relative;
+
+        &::after {
+          content: '';
+          position: relative;
+          left: 0%;
+          width: 0%;
+          bottom: 0px;
+          height: 0px;
+          transition: 0s;
+        }
+
+        &::before {
+          content: '';
+          position: relative;
+          right: 0%;
+          width: 0%;
+          bottom: 0px;
+          height: 0px;
+          transition: 0s;
+        }
+
+        &:hover::after {
+          left: 0%;
+          width: 0%;
+          transition: 0s;
+        }
+        &:hover::before {
+          right: 0%;
+          width: 0%;
+          transition: 0;
+        }
+      }
+    }
+  }
 `
 
 export default NavLink

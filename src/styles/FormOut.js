@@ -63,6 +63,32 @@ const FormOut = styled.div`
   .error_blue {
     border: 1px solid #44546d !important;
   }
+
+  /* mobile and tablette */
+  @media screen and (max-width: 700px) {
+    margin-top: 25px;
+    .form-group {
+      padding: 3.5px 0;
+    }
+    .form_name {
+      .form-group {
+        input {
+          padding: 13px 5px;
+          font-size: 15px;
+        }
+      }
+    }
+    .form-info {
+      input {
+        padding: 13px 5px;
+        font-size: 15px;
+      }
+    }
+    .btn_register {
+      padding: 12px;
+      font-size: 16px;
+    }
+  }
 `
 
 export default FormOut

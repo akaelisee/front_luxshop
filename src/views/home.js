@@ -2,20 +2,25 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import axios from 'axios'
 // import axios from '../services/axios'
 // import request from '../services/requests'
-import Her from '../assets/img/heere.jpg'
-import Him from '../assets/img/himee.jpg'
-import axios from 'axios'
-import banniereImg from '../assets/img/home.jpg'
+// component
+import { Loader } from '../components/loader'
+// style
 import { Banniere, Banner } from '../styles/Banniere'
 import Col from '../styles/Col'
 import Wrapper from '../styles/Wrapper'
 import Rows from '../styles/Rows'
 import { Card, Image, CardBody } from '../styles/Card'
+// image
+import Her from '../assets/img/heere.jpg'
+import Him from '../assets/img/himee.jpg'
+import banniereImg from '../assets/img/home.jpg'
 
 const Home = props => {
   const [products, setProducts] = useState([])
+  const [isLoader, setIsLoader] = useState(false)
   // const fetchUrl = `${request.fetchProducts}`
   const fetchUrl = `http://localhost:5000/api/products-eight`
   const baseImage = process.env.REACT_APP_BASE_IMAGE
@@ -32,11 +37,17 @@ const Home = props => {
       })
       .then(res => {
         setProducts(res.data.result)
+        setIsLoader(true)
       })
       .catch(err => {
         console.log(err)
       })
   }, [fetchUrl])
+
+  if (!isLoader) {
+    return <Loader />
+  }
+
   return (
     <Container>
       <Col>

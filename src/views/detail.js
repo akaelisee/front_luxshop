@@ -1,16 +1,15 @@
 // @ts-nocheck
-// @ts-ignore
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
 import { connect } from 'react-redux'
-import BtnLibrary from '../components/btnLibrary'
 import axios from '../services/axios'
 import request from '../services/requests'
 import { addLibrary, removeLibrary } from '../actions/library'
 import { addCard } from '../actions/cardAction'
-import BtnCard from '../components/btnCard'
+import BtnLibrary from '../components/btn/btnLibrary'
+import BtnCard from '../components/btn/btnCard'
 import Container from '../styles/Container'
 import Wrapper from '../styles/Wrapper'
 import Rows from '../styles/Rows'
@@ -19,6 +18,12 @@ import 'swiper/swiper-bundle.css'
 import Slide from '../components/slide'
 import DetailComponent from '../components/detailDescription/detailComponent'
 import Card from '../components/cardComponent/card'
+
+import ReactNotification from 'react-notifications-component'
+import { store } from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
+import 'animate.css'
+
 const Detail = ({ library }) => {
   const [product, setProduct] = useState([])
   const [poster, setPoster] = useState([])
@@ -30,7 +35,8 @@ const Detail = ({ library }) => {
   const param = useParams()
   const [isExist, setIsExist] = useState(1)
   const [isCard, setIsCard] = useState(false)
-
+  const [choosenColor, setChoosenColor] = useState('')
+  const [choosenDimension, setChoosenDimension] = useState('')
   useEffect(() => {
     axios
       .get(`${fetchUrl}${param?.id || param?._id}`, {
@@ -39,10 +45,13 @@ const Detail = ({ library }) => {
         }
       })
       .then(res => {
+        console.log(res)
         setProduct(res.data)
         setPoster(res.data.group_poster_path)
         setDimension(res.data.dimension)
+        setChoosenDimension(res.data.dimension[0])
         setcolor(res.data.color)
+        setChoosenColor(res.data.color[0])
         setgirth(res.data.girth)
         initSwiper()
       })
@@ -90,6 +99,7 @@ const Detail = ({ library }) => {
 
   return (
     <Container detail>
+      <ReactNotification />
       <Wrapper detail>
         <Rows>
           <div className='rows__swiper'>
@@ -105,9 +115,15 @@ const Detail = ({ library }) => {
             <div className='row__select'>
               <div className='select'>
                 <label> Couleur : </label>
-                <select name='' id='input' className='form-control'>
+                <select
+                  name=''
+                  id='input'
+                  className='form-control'
+                  onChange={e => setChoosenColor(e.target.value)}
+                  defaultValue={choosenColor}
+                >
                   {color.map((item, index) => (
-                    <option key={index} value=''>
+                    <option key={index} value={item}>
                       {item}
                     </option>
                   ))}
@@ -118,9 +134,15 @@ const Detail = ({ library }) => {
                 {dimension.length == 0 ? (
                   <div className='no__size'>NoSize</div>
                 ) : (
-                  <select name='' id='input' className='form-control'>
+                  <select
+                    name=''
+                    id='input'
+                    className='form-control'
+                    onChange={e => setChoosenDimension(e.target.value)}
+                    defaultValue={choosenDimension}
+                  >
                     {dimension.map((item, index) => (
-                      <option key={index} value=''>
+                      <option key={index} value={item}>
                         {item}
                       </option>
                     ))}
@@ -131,7 +153,7 @@ const Detail = ({ library }) => {
             <BtnGroup>
               <div className='btn__panier'>
                 <BtnCard
-                  addCard={addCard(product)}
+                  addCard={addCard(product, choosenColor, choosenDimension)}
                   isCard={isCard}
                   setIsCard={setIsCard}
                 />
@@ -139,10 +161,12 @@ const Detail = ({ library }) => {
               <div className='btn__library'>
                 <BtnLibrary
                   addLibrary={addLibrary(product)}
-                  removeLibrary={removeLibrary(product)}
+                  removeLibrary={removeLibrary(product.id)}
                   existsInLibrary={existsInLibrary}
+                  product={product}
                 />
               </div>
+              <div></div>
             </BtnGroup>
             <div>
               <ul type='square' style={{ fontSize: '13px' }}>

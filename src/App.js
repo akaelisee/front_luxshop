@@ -1,4 +1,3 @@
-import Content from './components/content'
 import { Provider } from 'react-redux'
 import './App.css'
 import Routes from './config/router'

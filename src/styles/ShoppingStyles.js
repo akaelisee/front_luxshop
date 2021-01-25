@@ -6,7 +6,7 @@ const ShoppingStyles = styled.div`
   align-self: center;
 
   .compte__user {
-    margin-right: 20px;
+    margin-right: 10px;
     align-self: center;
     .user {
       list-style-type: none;
@@ -81,6 +81,25 @@ const ShoppingStyles = styled.div`
   svg {
     color: #fff;
     font-size: 25px;
+  }
+
+  @media screen and (max-width: 850px) {
+    svg {
+      font-size: 25px;
+    }
+  }
+  @media screen and (max-width: 650px) {
+    .cart {
+      position: relative;
+      padding: 10px;
+      cursor: pointer;
+      span {
+        width: 51%;
+      }
+    }
+    svg {
+      font-size: 20px;
+    }
   }
 `
 

@@ -1,13 +1,8 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/no-unescaped-entities */
 // @ts-nocheck
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { connect } from 'react-redux'
 import { postLogin } from '../actions/login'
-import PropTypes from 'prop-types'
-import styled from 'styled-components'
 // service
 import axios from '../services/axios'
 import request from '../services/requests'
@@ -16,16 +11,20 @@ import Login from '../components/signinOut/login'
 import Register from '../components/signinOut/register'
 // image
 import imageLogin from '../assets/img/rigisterLogin.jpg'
-import { Logo, LogoHeader } from '../components/logo'
+import { Logo } from '../components/logo'
+// style
+import { ContainerSignOut, ContentImage } from '../styles/ContainerSignOut'
+import Loader from '../components/loader'
 
-const RegisterLogin = ({ headers }) => {
+const RegisterLogin = () => {
   const history = useHistory()
   const [errorMessage, setErrorMessage] = useState('')
   const [isExist, setIsExist] = useState(false)
   const [errorMessageEmail, setErrorMessageEmail] = useState('')
   const [errorMessageLogin, setErrorMessageLogin] = useState('')
   const [errorMessageChamps, setErrorMessageChamps] = useState('')
-  // const errorPost = displayError(err)
+  const [messageValidate, setMessageValidate] = useState('')
+  const [isLoader, setIsLoader] = useState(false)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -70,7 +69,7 @@ const RegisterLogin = ({ headers }) => {
       axios
         .post(request.fetchRegister, data)
         .then(res => {
-          alert('compte crée')
+          setMessageValidate('Votre compte a été bien crée')
           setIsExist(false)
         })
         .catch(err => {
@@ -103,13 +102,14 @@ const RegisterLogin = ({ headers }) => {
       // Logger User Redux
       dispatch(postLogin(data))
         .then(res => {
+          setIsLoader(true)
           localStorage.setItem('token', res.headers['auth-token'])
           history.push({
             pathname: '/home'
           })
         })
         .catch(err => {
-          setErrorMessageLogin('email ou mot de passe incorrect')
+          setErrorMessageLogin('Email ou mot de passe incorrect')
           console.log(err)
         })
     } catch (error) {
@@ -124,6 +124,7 @@ const RegisterLogin = ({ headers }) => {
           submitLogin={submitLogin}
           errorMessageChamps={errorMessageChamps}
           errorMessageLogin={errorMessageLogin}
+          isLoader={isLoader}
         />
       )
     } else {
@@ -132,12 +133,17 @@ const RegisterLogin = ({ headers }) => {
           submitRegister={submitRegister}
           errorMessage={errorMessage}
           errorMessageEmail={errorMessageEmail}
+          messageValidate={messageValidate}
         />
       )
     }
   }
 
-  return (
+  // if (isLoader) {
+  //   return
+  // }
+
+  return !isLoader ? (
     <ContainerSignOut>
       <ContentImage url={`url(${imageLogin})`} className='content_img' />
       <div className='content_signOut'>
@@ -162,84 +168,19 @@ const RegisterLogin = ({ headers }) => {
 
           {componentExist()}
           <div className='politique'>
-            En cliquant sur "Connexion" vous acceptez nos Conditions
-            d'utilisation. Veuillez consulter notre
+            En cliquant sur &quot;Connexion&quot; vous acceptez nos Conditions
+            d&lsquo;utilisation. Veuillez consulter notre
             <span> Politique de confidentialité </span>. Ce site est protégé par
             reCAPTCHA et la <span>Politique de confidentialité </span> et les
-            <span> Conditions d'utilisation</span>
-            Google s'appliquent.
+            <span> Conditions d&lsquo;utilisation</span>
+            Google s&lsquo;appliquent.
           </div>
         </div>
       </div>
     </ContainerSignOut>
+  ) : (
+    <Loader />
   )
 }
 
 export default RegisterLogin
-
-const ContainerSignOut = styled.div`
-  display: flex;
-  width: 100%;
-
-  .content_img {
-    width: 70%;
-  }
-  .content_signOut {
-    width: 500px;
-    .component_formulaire {
-      position: relative;
-      top: 80px;
-      width: 320px;
-      margin: 0 auto;
-      .logo {
-        text-align: center;
-      }
-      .group__btn {
-        padding: 40px 0 6px 0;
-        display: flex;
-        justify-content: space-around;
-        border-bottom: 2px solid #f0f5f7;
-        cursor: pointer;
-        font-size: 17px;
-
-        .underline {
-          position: relative;
-          &::after {
-            content: '';
-            position: absolute;
-            width: 140px;
-            left: -36px;
-            bottom: -8px;
-            height: 2px;
-            background-color: #44546d;
-          }
-        }
-        .under {
-          &::after {
-            content: '';
-            position: absolute;
-            width: 180px;
-          }
-        }
-        .not_underline {
-          text-decoration: none;
-        }
-      }
-      .politique {
-        margin: 25px 0;
-        text-align: center;
-        font-size: 12px;
-        span {
-          color: #44546d;
-        }
-      }
-    }
-  }
-`
-
-const ContentImage = styled.div`
-  background-image: ${props => props.url};
-  background-size: cover;
-  background-position: center center;
-  height: 100vh;
-`

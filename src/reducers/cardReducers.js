@@ -1,5 +1,5 @@
 /* eslint-disable no-case-declarations */
-import { ADD_CARD, REMOVE_CARD } from '../actions/cardAction'
+import { ADD_CARD, REMOVE_CARD, CLEAR_CARD } from '../actions/cardAction'
 import { INCREMENT_QTY, DECREMENT_QTY } from '../actions/qty'
 
 const initialState = {
@@ -37,6 +37,11 @@ export default (state = initialState, action = {}) => {
           item => item.id !== action.payload.product
         )
       }
+    case CLEAR_CARD:
+      return {
+        ...state,
+        productCard: []
+      }
     case INCREMENT_QTY:
       return {
         ...state,
@@ -52,7 +57,6 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         productCard: state.productCard.map(item => {
-          // { ...item, qty: item.qty == 1 ? item.qty : item.qty - 1 }
           if (item.id === action.payload.id) {
             return { ...item, qty: item.qty == 1 ? item.qty : item.qty - 1 }
           } else {

@@ -44,6 +44,24 @@ const FormIn = styled.div`
   .error_blue {
     border: 1px solid #44546d !important;
   }
+
+  /* mobile and tablette */
+  @media screen and (max-width: 700px) {
+    margin-top: 25px;
+    .form-group {
+      padding: 3.5px 0;
+    }
+    .form-group {
+      input {
+        padding: 13px 5px;
+        font-size: 15px;
+      }
+    }
+    .btn_login {
+      padding: 12px;
+      font-size: 16px;
+    }
+  }
 `
 
 export default FormIn

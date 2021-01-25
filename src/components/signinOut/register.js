@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+// components
+import { Loader } from '../loader'
 
 // style
 import FormOut from '../../styles/FormOut'
@@ -14,7 +14,6 @@ const Register = ({ submitRegister, errorMessage, errorMessageEmail }) => {
     password: ''
   })
   const [isError, setIsError] = useState(false)
-  const history = useHistory()
 
   return (
     <FormOut>

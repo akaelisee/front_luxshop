@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
-  width: 67%;
+  /* width: 67%; */
+  width: 1100px;
   margin: 60px auto;
   .wrapper__btn {
     margin: 60px 0;
