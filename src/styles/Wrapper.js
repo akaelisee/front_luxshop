@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
-  /* width: 67%; */
   width: 1100px;
   margin: 60px auto;
   .wrapper__btn {
@@ -61,6 +60,61 @@ const Wrapper = styled.div`
     }
     .not_underline {
       text-decoration: none;
+    }
+  }
+
+  @media screen and (max-width: 1170px) {
+    width: 900px;
+  }
+
+  @media screen and (max-width: 950px) {
+    width: 700px;
+    .wrapper__btn {
+      a {
+        padding: 10px 25px;
+        margin: 0 10px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 760px) {
+    width: 600px;
+    .wrapper__btn {
+      a {
+        padding: 10px 20px;
+        margin: 0 5px;
+        font-size: 15px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 640px) {
+    width: 90%;
+    .wrapper__btn {
+      a {
+        padding: 10px;
+        margin: 0 2px;
+        font-size: 14px;
+      }
+    }
+    .wrapper__title {
+      font-size: 17px;
+    }
+  }
+
+  @media screen and (max-width: 435px) {
+    margin: 30px auto;
+
+    .wrapper__btn {
+      margin: 30px 0;
+      a {
+        padding: 8px;
+        margin: 0 2px;
+        font-size: 12px;
+      }
+    }
+    .wrapper__title {
+      font-size: 14px;
     }
   }
 `

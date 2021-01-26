@@ -27,7 +27,6 @@ const Home = props => {
   const regex = / /gi
 
   useEffect(() => {
-    console.log(props)
     const token = localStorage.getItem('token')
     axios
       .get(fetchUrl, {

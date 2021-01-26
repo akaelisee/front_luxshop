@@ -87,7 +87,7 @@ export default Footer
 
 const Foot = styled.div`
   .footer-columns {
-    width: 67%;
+    width: 70%;
     margin: 25px auto;
     .footer__item {
       list-style-type: none;
@@ -128,6 +128,31 @@ const Foot = styled.div`
           margin-right: 15px;
         }
       }
+    }
+  }
+
+  @media screen and (max-width: 850px) {
+    .footer-columns {
+      .footer__item {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+      .footer__copy {
+        flex-direction: column;
+        text-align: center;
+        .footer__img {
+          margin: 10px 0;
+        }
+        .footer__logo {
+          margin: 10px 0;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 530px) {
+    .footer-columns {
+      width: 90%;
     }
   }
 `

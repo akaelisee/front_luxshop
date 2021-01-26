@@ -101,6 +101,14 @@ const ShoppingStyles = styled.div`
       font-size: 20px;
     }
   }
+
+  @media screen and (max-width: 600px) {
+    margin-right: 15px;
+    .compte__user {
+      margin-right: 5px;
+      align-self: center;
+    }
+  }
 `
 
 export default ShoppingStyles

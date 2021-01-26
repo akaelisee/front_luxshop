@@ -51,6 +51,31 @@ export const Card = styled.div`
       }
     }
   }
+
+  @media screen and (max-width: 1170px) {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    column-gap: 10px;
+    .card__product {
+      .card__image {
+        padding: 100px;
+      }
+    }
+  }
+  @media screen and (max-width: 760px) {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    column-gap: 15px;
+    .card__product {
+      .card__image {
+        padding: 80px 0;
+      }
+    }
+  }
+  @media screen and (max-width: 640px) {
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  }
+  @media screen and (max-width: 420px) {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
 `
 
 export const Image = styled.img`
@@ -74,6 +99,13 @@ export const Image = styled.img`
       `
     }
   }}
+
+  @media screen and (max-width: 1170px) {
+    width: 200px;
+  }
+  @media screen and (max-width: 760px) {
+    width: 140px;
+  }
 `
 export const CardBody = styled.div`
   /* height: 100px; */
@@ -82,6 +114,9 @@ export const CardBody = styled.div`
   font-family: 'Poppins', sans-serif;
   font-weight: 300;
   padding-bottom: 20px;
+
+  @media screen and (max-width: 1170px) {
+  }
 `
 
 export default Card

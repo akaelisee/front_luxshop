@@ -70,4 +70,27 @@ const LogoImg = styled.div`
       `
     }
   }}
+
+  @media screen and (max-width: 850px) {
+    font-size: 25px;
+    font-weight: 600;
+    color: #44546d;
+    z-index: -1;
+
+    ${props => {
+      if (props.reduire) {
+        return `
+      img {
+        width: 27px;
+      }
+      `
+      } else {
+        return `
+      img {
+          width: 110px;
+        }
+      `
+      }
+    }}
+  }
 `

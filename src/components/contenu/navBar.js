@@ -139,6 +139,7 @@ const NavBar = ({ isNav, cardReducers }) => {
         )}
         {cardExist()}
       </div>
+      {/* Responsive */}
       <div className='responsive'>
         <Nav>
           <div className='nav_bar_no_scroll'>
@@ -205,6 +206,7 @@ const NavBar = ({ isNav, cardReducers }) => {
           </div>
         </Nav>
       </div>
+      {/* Responsive */}
     </>
   )
 }

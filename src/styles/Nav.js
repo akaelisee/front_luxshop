@@ -117,6 +117,38 @@ const Nav = styled.div`
       }
     }
   }
+
+  @media screen and (max-width: 600px) {
+    .nav_bar_no_scroll {
+      .nav__bar {
+        .globe {
+          margin-left: 15px;
+          width: 55px;
+        }
+      }
+    }
+    .navbar__payment {
+      display: flex;
+      justify-content: space-between;
+      background-color: #071120;
+      padding: 15px 25px;
+      .text {
+        color: #fff;
+        align-self: center;
+        a {
+          text-decoration: none;
+          color: inherit;
+          letter-spacing: 2px;
+        }
+      }
+      .logo {
+        text-align: center;
+      }
+      .vide {
+        width: 250px;
+      }
+    }
+  }
 `
 
 export default Nav

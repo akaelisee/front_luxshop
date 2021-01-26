@@ -43,6 +43,66 @@ const Col = styled.div`
       }
     }
   }
+  @media screen and (max-width: 850px) {
+    .col__text {
+      left: 6%;
+      .text {
+        font-size: 35px;
+      }
+      .sous__text {
+        font-size: 20px;
+      }
+      .btn__explore {
+        a {
+          padding: 6px 40px;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 650px) {
+    .col__text {
+      position: absolute;
+      top: 35%;
+      left: 5%;
+      .text {
+        font-size: 25px;
+        line-height: 40px;
+      }
+      .sous__text {
+        font-size: 18px;
+        margin-bottom: 20px;
+        line-height: 30px;
+      }
+      .btn__explore {
+        text-align: center;
+        a {
+          padding: 6px 30px;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 430px) {
+    .col__text {
+      .text {
+        font-size: 18px;
+        letter-spacing: 1px;
+      }
+      .sous__text {
+        font-size: 14px;
+        margin-bottom: 20px;
+        line-height: 30px;
+      }
+      .btn__explore {
+        a {
+          padding: 6px 25px;
+          font-size: 15px;
+          background-color: rgba(68, 84, 109, 0.844);
+          border: 1px solid rgba(68, 84, 109, 0.844);
+        }
+      }
+    }
+  }
 `
 
 export default Col

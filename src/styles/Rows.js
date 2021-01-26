@@ -5,7 +5,6 @@ const Rows = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 15px;
-  /* margin: 0 25px 0 0; */
   .col__her {
     position: relative;
     .her__looks {
@@ -122,6 +121,13 @@ const Rows = styled.div`
           margin-top: 10px;
         }
       }
+    }
+  }
+
+  @media screen and (max-width: 640px) {
+    display: block;
+    .col__her {
+      margin-bottom: 25px;
     }
   }
 `

@@ -6,6 +6,10 @@ export const Banniere = styled.div`
   background-size: cover;
   background-position: center center;
   height: 80vh;
+
+  @media screen and (max-width: 850px) {
+    background-position: 65%;
+  }
 `
 
 export const Banner = styled.div`

@@ -32,6 +32,9 @@ const Container = styled.div`
           box-shadow: 0px 5px 7px 1px rgba(0,0,0,0.75);
         }
       }
+    @media screen and (max-width: 530px) {
+      background: transparent; 
+    }
       `
     } else if (props.detail) {
       return `
