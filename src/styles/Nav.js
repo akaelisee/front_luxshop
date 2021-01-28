@@ -96,24 +96,13 @@ const Nav = styled.div`
       }
     }
     .navbar__payment {
-      display: flex;
-      justify-content: space-between;
-      background-color: #071120;
-      padding: 15px 25px;
       .text {
-        color: #fff;
-        align-self: center;
+        width: 45%;
         a {
-          text-decoration: none;
-          color: inherit;
-          letter-spacing: 2px;
+          span {
+            display: none;
+          }
         }
-      }
-      .logo {
-        text-align: center;
-      }
-      .vide {
-        width: 250px;
       }
     }
   }
@@ -128,24 +117,13 @@ const Nav = styled.div`
       }
     }
     .navbar__payment {
-      display: flex;
-      justify-content: space-between;
-      background-color: #071120;
-      padding: 15px 25px;
       .text {
-        color: #fff;
-        align-self: center;
+        width: 100%;
         a {
-          text-decoration: none;
-          color: inherit;
-          letter-spacing: 2px;
+          span {
+            display: none;
+          }
         }
-      }
-      .logo {
-        text-align: center;
-      }
-      .vide {
-        width: 250px;
       }
     }
   }

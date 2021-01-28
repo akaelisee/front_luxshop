@@ -42,6 +42,16 @@ const Container = styled.div`
       `
     }
   }}
+
+  @media screen and (max-width: 600px) {
+    ${props => {
+      if (props.detail) {
+        return `
+        padding-top: 75px;
+      `
+      }
+    }}
+  }
 `
 
 export default Container

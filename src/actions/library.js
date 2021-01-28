@@ -1,5 +1,3 @@
-import { useDispatch } from 'react-redux'
-
 export const ADD_LIBRARY = 'ADD_LIBRARY'
 export const REMOVE_LIBRARY = 'REMOVE_LIBRARY'
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import Row from '../components/row'
-import request from '../services/requests'
+// import request from '../services/requests'
 import BannerHim from '../assets/img/businessman-checking-time.jpg'
 
 const ProductHim = () => {

@@ -17,10 +17,10 @@ const Footer = () => {
             <span> Achat </span>
             <ul>
               <li>
-                <Link to='/product'> Toutes les bijoux </Link>
+                <Link to='/watches'> Toutes les montres </Link>
               </li>
               <li>
-                <Link to='/watches'> Toutes les montres </Link>
+                <Link to='/necklaces'> Tous les collier </Link>
               </li>
               <li>
                 <Link to='/bracelets'> Tous les bracelets </Link>

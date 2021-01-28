@@ -69,10 +69,12 @@ const RegisterLogin = () => {
       axios
         .post(request.fetchRegister, data)
         .then(res => {
+          console.log(res)
           setMessageValidate('Votre compte a été bien crée')
           setIsExist(false)
         })
         .catch(err => {
+          console.log(err)
           setErrorMessageEmail(
             'Veuillez vous connecter avec le compte que vous avez déjà créé.'
           )

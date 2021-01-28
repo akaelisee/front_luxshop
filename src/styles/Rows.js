@@ -79,51 +79,6 @@ const Rows = styled.div`
     }
   }
 
-  .rows__swiper {
-  }
-  .row__description {
-    .row__title {
-      display: flex;
-      justify-content: space-between;
-      letter-spacing: 3px;
-      font-size: 17px;
-      margin-bottom: 20px;
-    }
-    .row__select {
-      padding-top: 15px;
-      display: flex;
-      .select {
-        display: flex;
-        flex-direction: column;
-        margin-right: 30px;
-        label {
-          letter-spacing: 1.5px;
-          font-size: 15px;
-        }
-        select {
-          width: 150px;
-          padding: 10px;
-          margin-top: 10px;
-          text-align: center;
-          text-transform: capitalize;
-          background-color: #071120;
-          color: #fff;
-          outline: none;
-          border: none;
-        }
-        .no__size {
-          background-color: #071120;
-          letter-spacing: 1.5px;
-          font-size: 12px;
-          color: #fff;
-          width: 150px;
-          padding: 10px;
-          margin-top: 10px;
-        }
-      }
-    }
-  }
-
   @media screen and (max-width: 640px) {
     display: block;
     .col__her {

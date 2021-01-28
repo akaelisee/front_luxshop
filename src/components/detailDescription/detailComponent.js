@@ -1,11 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const DetailComponent = ({ product, color, girth }) => {
-  useEffect(() => {
-    console.log(product)
-  }, [])
   return (
     <DetailStyle>
       <div className='detail__group'>
@@ -114,6 +111,27 @@ const DetailStyle = styled.div`
           color: rgb(110, 110, 110);
           line-height: 22.4px;
           letter-spacing: 0.15px;
+        }
+        &:last-child {
+          border-bottom: 0px;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 950px) {
+    .detail__group {
+      grid-template-columns: 1fr;
+      row-gap: 1.3rem;
+      .detail__overview {
+        font-size: 14px;
+        p {
+          display: none;
+        }
+      }
+      .detail__table {
+        font-size: 13px;
+        .detail__item {
         }
       }
     }

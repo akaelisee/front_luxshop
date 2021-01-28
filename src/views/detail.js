@@ -12,17 +12,16 @@ import BtnLibrary from '../components/btn/btnLibrary'
 import BtnCard from '../components/btn/btnCard'
 import Container from '../styles/Container'
 import Wrapper from '../styles/Wrapper'
-import Rows from '../styles/Rows'
+// import Rows from '../styles/Rows'
 import Swiper from 'swiper'
 import 'swiper/swiper-bundle.css'
 import Slide from '../components/slide'
 import DetailComponent from '../components/detailDescription/detailComponent'
 import Card from '../components/cardComponent/card'
-
+import RowSwiper from '../styles/RowSwiper'
 import ReactNotification from 'react-notifications-component'
-import { store } from 'react-notifications-component'
-import 'react-notifications-component/dist/theme.css'
-import 'animate.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
 
 const Detail = ({ library }) => {
   const [product, setProduct] = useState([])
@@ -33,6 +32,10 @@ const Detail = ({ library }) => {
   const fetchUrl = `${request.fetchProducts}/`
   const token = localStorage.getItem('token')
   const param = useParams()
+  const [isExistRes, setIsExistRes] = useState(false)
+  const [isExistLivraison, setIsExistLivraison] = useState(false)
+  const [isExistPay, setIsExistPay] = useState(false)
+  const [isExistRetours, setIsExistRetours] = useState(false)
   const [isExist, setIsExist] = useState(1)
   const [isCard, setIsCard] = useState(false)
   const [choosenColor, setChoosenColor] = useState('')
@@ -45,7 +48,6 @@ const Detail = ({ library }) => {
         }
       })
       .then(res => {
-        console.log(res)
         setProduct(res.data)
         setPoster(res.data.group_poster_path)
         setDimension(res.data.dimension)
@@ -62,6 +64,7 @@ const Detail = ({ library }) => {
 
   const initSwiper = () => {
     let mySwiper = new Swiper('.swiper-container', {
+      loop: true,
       // Navigation arrows
       navigation: {
         nextEl: '.swiper-button-next',
@@ -98,10 +101,10 @@ const Detail = ({ library }) => {
   }
 
   return (
-    <Container detail>
+    <Container detail slide>
       <ReactNotification />
       <Wrapper detail>
-        <Rows>
+        <RowSwiper>
           <div className='rows__swiper'>
             <Slide poster={poster} />
           </div>
@@ -175,34 +178,135 @@ const Detail = ({ library }) => {
               </ul>
             </div>
           </div>
-        </Rows>
-        <div className='wrapper__description'>
-          <div
-            onClick={() => setIsExist(1)}
-            className={isExist !== 1 ? 'not_underline' : ' underline'}
-          >
-            détail
+        </RowSwiper>
+        {/* body */}
+        <div className='wrapper__hide'>
+          <div className='wrapper__description'>
+            <div
+              onClick={() => setIsExist(1)}
+              className={isExist !== 1 ? 'not_underline' : ' underline'}
+            >
+              détail
+            </div>
+            <div
+              onClick={() => setIsExist(2)}
+              className={isExist !== 2 ? 'not_underline' : 'under underline'}
+            >
+              livraison
+            </div>
+            <div
+              onClick={() => setIsExist(3)}
+              className={isExist !== 3 ? 'not_underline' : 'under underline'}
+            >
+              paiement
+            </div>
+            <div
+              onClick={() => setIsExist(4)}
+              className={isExist !== 4 ? 'not_underline' : 'under underline'}
+            >
+              retours
+            </div>
           </div>
-          <div
-            onClick={() => setIsExist(2)}
-            className={isExist !== 2 ? 'not_underline' : 'under underline'}
-          >
-            livraison
+          <div>{handleExist()}</div>
+        </div>
+        {/*  */}
+
+        {/* responsive */}
+        <div className='wrapper__description__responsive'>
+          <hr />
+          <div className='chevron'>
+            <div
+              className='chevron__hide'
+              onClick={() => setIsExistRes(!isExistRes)}
+            >
+              <span> détail </span>
+              <span
+                className={
+                  isExistRes
+                    ? 'icon__chevron rotate__true'
+                    : 'icon__chevron rotate__false'
+                }
+              >
+                <FontAwesomeIcon icon={faChevronUp} />
+              </span>
+            </div>
+            {isExistRes ? (
+              <DetailComponent product={product} color={color} girth={girth} />
+            ) : (
+              <></>
+            )}
           </div>
-          <div
-            onClick={() => setIsExist(3)}
-            className={isExist !== 3 ? 'not_underline' : 'under underline'}
-          >
-            paiement
+
+          <div className='chevron'>
+            <div
+              className='chevron__hide'
+              onClick={() => setIsExistLivraison(!isExistLivraison)}
+            >
+              <span> Livraison </span>
+              <span
+                className={
+                  isExistLivraison
+                    ? 'icon__chevron rotate__true'
+                    : 'icon__chevron rotate__false'
+                }
+              >
+                <FontAwesomeIcon icon={faChevronUp} />
+              </span>
+            </div>
+            {isExistLivraison ? (
+              <DetailComponent product={product} color={color} girth={girth} />
+            ) : (
+              <></>
+            )}
           </div>
-          <div
-            onClick={() => setIsExist(4)}
-            className={isExist !== 4 ? 'not_underline' : 'under underline'}
-          >
-            retours
+
+          <div className='chevron'>
+            <div
+              className='chevron__hide'
+              onClick={() => setIsExistPay(!isExistPay)}
+            >
+              <span> Paiement </span>
+              <span
+                className={
+                  isExistPay
+                    ? 'icon__chevron rotate__true'
+                    : 'icon__chevron rotate__false'
+                }
+              >
+                <FontAwesomeIcon icon={faChevronUp} />
+              </span>
+            </div>
+            {isExistPay ? (
+              <DetailComponent product={product} color={color} girth={girth} />
+            ) : (
+              <></>
+            )}
+          </div>
+
+          <div className='chevron'>
+            <div
+              className='chevron__hide'
+              onClick={() => setIsExistRetours(!isExistRetours)}
+            >
+              <span> Retours </span>
+              <span
+                className={
+                  isExistLivraison
+                    ? 'icon__chevron rotate__true'
+                    : 'icon__chevron rotate__false'
+                }
+              >
+                <FontAwesomeIcon icon={faChevronUp} />
+              </span>
+            </div>
+            {isExistRetours ? (
+              <DetailComponent product={product} color={color} girth={girth} />
+            ) : (
+              <></>
+            )}
           </div>
         </div>
-        <div>{handleExist()}</div>
+        {/* body */}
       </Wrapper>
       <div>{cardExist()}</div>
     </Container>
@@ -228,5 +332,12 @@ const BtnGroup = styled.div`
   .btn__library {
     width: 60%;
     margin: 20px auto;
+  }
+
+  @media screen and (max-width: 550px) {
+    .btn__library {
+      width: 100%;
+      margin: 20px auto;
+    }
   }
 `
