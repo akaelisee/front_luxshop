@@ -63,7 +63,7 @@ const Detail = ({ library }) => {
   }, [fetchUrl])
 
   const initSwiper = () => {
-    let mySwiper = new Swiper('.swiper-container', {
+    new Swiper('.swiper-container', {
       loop: true,
       // Navigation arrows
       navigation: {
