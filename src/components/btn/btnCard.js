@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
@@ -20,7 +20,8 @@ const BtnCard = ({ addCard, setIsCard }) => {
 }
 
 BtnCard.propTypes = {
-  addCard: PropTypes.object
+  addCard: PropTypes.object,
+  setIsCard: PropTypes.any
 }
 
 export default BtnCard

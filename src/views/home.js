@@ -18,7 +18,7 @@ import Her from '../assets/img/heere.jpg'
 import Him from '../assets/img/himee.jpg'
 import banniereImg from '../assets/img/home.jpg'
 
-const Home = props => {
+const Home = () => {
   const [products, setProducts] = useState([])
   const [isLoader, setIsLoader] = useState(false)
   // const fetchUrl = `${request.fetchProducts}`

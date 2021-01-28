@@ -14,4 +14,25 @@ export const Loader = () => {
   )
 }
 
+export const LoaderPayement = () => {
+  return (
+    <div className='lds-container'>
+      <div className='lds-spinner'>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  )
+}
+
 export default Loader

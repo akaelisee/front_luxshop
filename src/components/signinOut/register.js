@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 // components
-import { Loader } from '../loader'
-
 // style
 import FormOut from '../../styles/FormOut'
 

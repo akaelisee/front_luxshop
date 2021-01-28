@@ -1,3 +1,4 @@
+// @ts-nocheck
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
@@ -63,6 +64,10 @@ const Wrapper = styled.div`
     }
   }
 
+  .wrapper__description__responsive {
+    display: none;
+  }
+
   @media screen and (max-width: 1170px) {
     width: 900px;
   }
@@ -75,6 +80,56 @@ const Wrapper = styled.div`
         margin: 0 10px;
       }
     }
+    .wrapper__hide {
+      display: none;
+    }
+
+    .wrapper__description__responsive {
+      margin: 50px 0;
+      transition: all 0.2s ease;
+      display: block;
+
+      .chevron {
+        padding: 10px 0;
+        border-bottom: 1px solid #f0f5f7;
+      }
+      .chevron__hide {
+        display: flex;
+        justify-content: space-between;
+        text-transform: uppercase;
+        padding: 5px 0;
+        cursor: pointer;
+
+        .rotate__true {
+          transition: all 0.2s ease;
+          transform: rotate(0deg);
+        }
+        .rotate__false {
+          transition: all 0.2s ease;
+          transform: rotate(-180deg);
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 850px) {
+    ${props => {
+      if (props.detail) {
+        return `
+       margin: 10px auto;
+      `
+      }
+    }}
+  }
+
+  @media screen and (max-width: 600px) {
+    ${props => {
+      if (props.detail) {
+        return `
+       margin: 0px auto;
+      `
+      }
+    }}
   }
 
   @media screen and (max-width: 760px) {

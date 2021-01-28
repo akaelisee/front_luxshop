@@ -29,17 +29,15 @@ const NavBar = ({ isNav, cardReducers }) => {
   const cardExist = () => {
     if (isCard) {
       document.querySelector('body').style.overflow = 'hidden'
-      document.querySelector('body').style.backgroundColor =
-        'rgba(187, 187, 187, 0.542)'
+      // document.querySelector('body').style.backgroundColor =
+      //   'rgba(187, 187, 187, 0.542)'
       return <Card isCard={isCard} setIsCard={setIsCard} />
     } else {
       document.querySelector('body').style.overflow = 'auto'
-      document.querySelector('body').style.backgroundColor = 'transparent'
+      // document.querySelector('body').style.backgroundColor = 'transparent'
       return <></>
     }
   }
-
-  const navResponsive = () => {}
 
   return (
     <>
@@ -205,6 +203,7 @@ const NavBar = ({ isNav, cardReducers }) => {
             )}
           </div>
         </Nav>
+        {cardExist()}
       </div>
       {/* Responsive */}
     </>

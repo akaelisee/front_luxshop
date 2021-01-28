@@ -1,5 +1,3 @@
-import { useDispatch } from 'react-redux'
-
 export const INCREMENT_QTY = 'INCREMENT_QTY'
 export const DECREMENT_QTY = 'DECREMENT_QTY'
 

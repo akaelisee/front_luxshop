@@ -1,19 +1,18 @@
 /* eslint-disable react/prop-types */
 // @ts-nocheck
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { connect, useDispatch, useSelector } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-regular-svg-icons'
 import { Icon } from '../logo'
-
-import ReactNotification from 'react-notifications-component'
 import { store } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 import 'animate.css'
 const BtnLibrary = ({ addLibrary, removeLibrary, product, library }) => {
   const dispatch = useDispatch()
+
   const handleOnClickDefault = () => {
     store.addNotification({
       title: 'Article savegardé',
@@ -90,4 +89,29 @@ const BtnStyle = styled.div`
       `
     }
   }}
+
+  @media screen and (max-width: 550px) {
+    p {
+      svg {
+        font-size: 20px;
+      }
+      span {
+        font-size: 17px;
+      }
+    }
+    ${props => {
+      if (props.delete) {
+        return `
+      p {
+        svg {
+          color: red;
+        }
+        span {
+          font-size: 16px;
+        }
+      }
+      `
+      }
+    }}
+  }
 `

@@ -1,10 +1,5 @@
 import React from 'react'
-import {
-  Route,
-  BrowserRouter as Router,
-  Switch,
-  Redirect
-} from 'react-router-dom'
+import { BrowserRouter as Router, Switch } from 'react-router-dom'
 import PrivateRoute from './privateRoute'
 import Home from '../views/home'
 import RegisterLogin from '../views/registerLogin'
@@ -15,13 +10,12 @@ import Necklaces from '../views/necklaces'
 import Bracelets from '../views/bracelets'
 import Watches from '../views/watches'
 import Detail from '../views/detail'
-import CardPage from '../views/cardPage'
 import Account from '../views/account'
 import ProductHer from '../views/productHer'
 import ProductHim from '../views/productHim'
 import Contact from '../views/contact'
 import Payment from '../views/payment'
-import NoPage from '../views/404'
+import Success from '../views/success'
 
 const Routes = () => {
   return (
@@ -29,6 +23,7 @@ const Routes = () => {
       <Switch>
         <PrivateRoute exact path='/' component={RegisterLogin}></PrivateRoute>
         <PrivateRoute exact path='/payment' component={Payment}></PrivateRoute>
+        <PrivateRoute exact path='/success' component={Success}></PrivateRoute>
         {/* <Route path='*' component={NoPage} /> */}
         {/* <Redirect to='/'></Redirect> */}
         <Content>
@@ -60,7 +55,6 @@ const Routes = () => {
             path='/detail/:name/:id'
             component={Detail}
           ></PrivateRoute>
-          <PrivateRoute exact path='/card' component={CardPage}></PrivateRoute>
           <PrivateRoute
             exact
             path='/looks-for-her'

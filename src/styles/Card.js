@@ -102,9 +102,60 @@ export const Image = styled.img`
 
   @media screen and (max-width: 1170px) {
     width: 200px;
+    ${props => {
+      if (props.post) {
+        return `
+        width: 100%;
+      `
+      } else if (props.slide) {
+        return `
+        width: 65%;
+      `
+      } else if (props.account) {
+        return `
+        width: 190px;
+      `
+      }
+    }}
   }
+
+  @media screen and (max-width: 960px) {
+    ${props => {
+      if (props.slide) {
+        return `
+        width: 100%;
+        `
+      }
+    }}
+  }
+
   @media screen and (max-width: 760px) {
     width: 140px;
+    ${props => {
+      if (props.post) {
+        return `
+        width: 100%;
+      `
+      } else if (props.slide) {
+        return `
+        width: 100%;
+      `
+      } else if (props.account) {
+        return `
+        width: 190px;
+      `
+      }
+    }}
+  }
+
+  @media screen and (max-width: 600px) {
+    ${props => {
+      if (props.slide) {
+        return `
+        width: 100%;
+        `
+      }
+    }}
   }
 `
 export const CardBody = styled.div`

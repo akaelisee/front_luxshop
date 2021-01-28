@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React from 'react'
 import PropTypes from 'prop-types'
-import { connect, useDispatch } from 'react-redux'
+import { connect } from 'react-redux'
 import Container from '../styles/Container'
 import Checkout from '../components/checkout'
 import { Elements } from '@stripe/react-stripe-js'
@@ -13,7 +13,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 const Payment = ({ cardReducers }) => {
   const stripePromise = loadStripe(process.env.REACT_APP_KEY)
-  const dispatch = useDispatch()
 
   const sum = () => {
     let total = 0
@@ -28,7 +27,8 @@ const Payment = ({ cardReducers }) => {
         <div className='navbar__payment'>
           <div className='text'>
             <Link to='/home'>
-              <FontAwesomeIcon icon={faArrowLeft} /> Continuer mon Shopping{' '}
+              <FontAwesomeIcon icon={faArrowLeft} />
+              <span> Continuer mon Shopping</span>
             </Link>
           </div>
           <div className='logo'>

@@ -1,11 +1,11 @@
 // @ts-nocheck
-import React, { useState } from 'react'
+import React from 'react'
 import Banniere from '../styles/Banniere'
 import BanniereContact from '../assets/img/conatct.jpg'
 const Contact = () => {
-  const [status, setStatus] = useState({
-    status: ''
-  })
+  // const [status, setStatus] = useState({
+  //   status: ''
+  // })
 
   return (
     <div>

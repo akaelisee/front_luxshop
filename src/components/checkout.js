@@ -1,37 +1,26 @@
 // @ts-nocheck
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 // import axios from '../services/axios'
 import axios from 'axios'
-import request from '../services/requests'
+// import request from '../services/requests'
 import { useHistory } from 'react-router-dom'
-// import StripeCheckout from 'react-stripe-checkout'
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
-import styled from 'styled-components'
 import { allRemoveCard } from '../actions/cardAction'
-import { connect, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { LoaderPayement } from './loader'
+import StyleChekout from '../styles/StyleChekout'
 
 const Checkout = ({ cards, total }) => {
   const [isProcessing, setIsProcessing] = useState(false)
   const [checkoutErrorMsg, setCheckoutErrorMsg] = useState('')
   const [buttonMsg, setButtonMsg] = useState('Passer la commande')
-  const [verifiedMsg, setVerifiedMsg] = useState('')
   const baseImage = process.env.REACT_APP_BASE_IMAGE
   const element = useElements()
   const token = localStorage.getItem('token')
   const stripe = useStripe()
   const dispatch = useDispatch()
-
-  useEffect(() => {
-    console.log(total())
-  }, [])
-
-  const handleChange = e => {
-    if (e.error) {
-      return setCheckoutErrorMsg(e.error.message)
-    }
-    setCheckoutErrorMsg('')
-  }
+  const history = useHistory()
 
   const CARD_ELEMENT_OPTIONS = {
     style: {
@@ -56,8 +45,10 @@ const Checkout = ({ cards, total }) => {
     e.preventDefault()
 
     setIsProcessing(true)
-    setButtonMsg('Processing...')
-
+    if (isProcessing) {
+      setButtonMsg(<LoaderPayement />)
+    }
+    // manuella@gmail.com
     const cardElement = element.getElement('card')
 
     const billingInfo = {
@@ -97,7 +88,6 @@ const Checkout = ({ cards, total }) => {
       if (paymentMethodObj.error) {
         setCheckoutErrorMsg(paymentMethodObj.error.message)
         setIsProcessing(false)
-        setButtonMsg('Pay')
         return
       }
 
@@ -119,15 +109,23 @@ const Checkout = ({ cards, total }) => {
       setButtonMsg('Success! Payment is Complete')
 
       setTimeout(() => {
-        setButtonMsg('Pay')
+        // setButtonMsg('Pay')
         setIsProcessing(false)
-        dispatch(allRemoveCard(cards))
       }, 2000)
 
-      console.log(confirmPayment.paymentIntent.status)
+      if (confirmPayment.paymentIntent.status == 'succeeded') {
+        dispatch(allRemoveCard(cards))
+
+        history.push({
+          pathname: '/success'
+        })
+      }
     } catch (error) {
-      setCheckoutErrorMsg(error.message)
+      setCheckoutErrorMsg(`l'email n'est pas correct`)
       setIsProcessing(false)
+      if (!isProcessing) {
+        setButtonMsg('Passer la commande')
+      }
     }
   }
 
@@ -151,7 +149,21 @@ const Checkout = ({ cards, total }) => {
                 </div>
                 <div className='form__group'>
                   <label> email *</label>
-                  <input type='email' name='email' required />
+                  <input
+                    type='email'
+                    name='email'
+                    required
+                    className={checkoutErrorMsg ? 'input__red' : ''}
+                  />
+                </div>
+                <div
+                  style={{
+                    color: '#ec2f4d',
+                    fontSize: '13px',
+                    marginBottom: '0px'
+                  }}
+                >
+                  {checkoutErrorMsg}
                 </div>
                 <div className='form__group'>
                   <label> NUMÉRO DE TÉLÉPHONE * </label>
@@ -222,174 +234,8 @@ const Checkout = ({ cards, total }) => {
           </div>
         </div>
       </div>
-
-      {/* <p>{checkoutErrorMsg}</p> */}
     </StyleChekout>
   )
 }
 
 export default Checkout
-
-const StyleChekout = styled.div`
-  .checkout__title {
-    margin: 30px 0;
-    text-align: center;
-    span {
-      font-size: 33px;
-      letter-spacing: 2px;
-    }
-  }
-  .grid__checkout {
-    width: 65%;
-    margin: 0 auto;
-    display: grid;
-    gap: 25px;
-    grid-template-columns: 70% 30%;
-
-    .detail__payment {
-      border-top: 1px solid #aaa;
-      .info {
-        margin: 30px 0;
-        font-size: 20px;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-      }
-      form {
-        .form__card {
-          box-shadow: rgba(0, 0, 0, 0.13) 0px 0.3rem 0.3rem 0px,
-            rgba(0, 0, 0, 0.19) 0px 0.1rem 0.7rem 0px;
-          padding: 25px 0;
-          .form__title {
-            text-align: center;
-            padding: 15px 0;
-            font-size: 20px;
-          }
-          .group {
-            width: 90%;
-            margin: 0 auto;
-            .form__group {
-              padding: 5px 0;
-              display: flex;
-              flex-direction: column;
-              label {
-                font-size: 15px;
-                line-height: 30px;
-                color: rgb(0, 8, 28);
-                letter-spacing: 2px;
-                text-transform: uppercase;
-              }
-              input {
-                border-radius: 2px;
-                background-color: rgb(255, 255, 255);
-                border: 1px solid rgb(199, 199, 199);
-                text-size-adjust: 100%;
-                padding: 15px 8px;
-                outline: none;
-              }
-              input[type='number'] {
-                -moz-appearance: textfield;
-                appearance: textfield;
-                margin: 0;
-
-                &::-webkit-inner-spin-button,
-                &::-webkit-outer-spin-button {
-                  -webkit-appearance: none;
-                  margin: 0;
-                }
-              }
-              .element {
-                border: 1px solid rgb(199, 199, 199);
-                padding: 15px 5px;
-                text-size-adjust: 100%;
-                border-radius: 2px;
-                background-color: rgb(255, 255, 255);
-              }
-            }
-          }
-        }
-        .btn__checkout {
-          padding: 50px 0;
-          button {
-            width: 100%;
-            padding: 17px 0;
-            background-color: #071120;
-            border-radius: 2px;
-            font-size: 15px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            border: none;
-            color: #c8ba7a;
-            cursor: pointer;
-            outline: none;
-          }
-        }
-      }
-    }
-    .visualisation__product {
-      box-shadow: rgba(0, 0, 0, 0.13) 0px 0.3rem 0.3rem 0px,
-        rgba(0, 0, 0, 0.19) 0px 0.1rem 0.7rem 0px;
-      align-self: flex-start;
-
-      .grid__product {
-        display: flex;
-        padding: 1px 0;
-        border-bottom: 1px solid #aaa;
-        .product__image {
-          padding: 55px 50px;
-          margin-right: 5px;
-          .image {
-            position: relative;
-            img {
-              width: 80px;
-              background-color: transparent;
-              position: absolute;
-              top: 50%;
-              left: 50%;
-              transform: translate(-50%, -50%);
-            }
-          }
-        }
-        .product__detail {
-          letter-spacing: 2px;
-          padding: 8px 0;
-          font-size: 14px;
-          .product__title {
-            padding: 3px 0;
-          }
-          .product__price {
-            padding: 3px 0;
-          }
-          .product__color {
-            text-transform: capitalize;
-          }
-        }
-        .product__qty {
-          width: 100px;
-          display: flex;
-          flex-direction: column;
-          -webkit-box-pack: justify;
-          justify-content: space-between;
-          align-items: flex-end;
-          align-self: stretch;
-          padding: 10px 0;
-          .drop {
-            left: 0;
-            cursor: pointer;
-            svg {
-              font-size: 18px;
-            }
-          }
-        }
-      }
-      .total {
-        position: relative;
-        display: flex;
-        justify-content: space-between;
-        padding: 20px 18px;
-        font-size: 15px;
-        letter-spacing: 2px;
-        border-bottom: 1px solid #aaa;
-      }
-    }
-  }
-`

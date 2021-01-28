@@ -8,7 +8,7 @@ import { removeLibrary } from '../actions/library'
 import Container from '../styles/Container'
 import styled from 'styled-components'
 import Wrapper from '../styles/Wrapper'
-import { Card, CardBody, Image } from '../styles/Card'
+import { Card, Image } from '../styles/Card'
 import { Icon } from '../components/logo'
 const Account = ({ login, library }) => {
   const baseImage = process.env.REACT_APP_BASE_IMAGE

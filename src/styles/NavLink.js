@@ -11,15 +11,15 @@ const PageLeft = keyframes`
   }
 `
 
-const PageRight = keyframes`
-  from {
-    transform: translate(0%, 0%);
-  }
+// const PageRight = keyframes`
+//   from {
+//     transform: translate(0%, 0%);
+//   }
 
-  to {
-    transform: translate(-100%, 0%);
-  }
-`
+//   to {
+//     transform: translate(-100%, 0%);
+//   }
+// `
 
 const NavLink = styled.div`
   text-align: center;
