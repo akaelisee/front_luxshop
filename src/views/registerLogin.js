@@ -4,8 +4,8 @@ import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { postLogin } from '../actions/login'
 // service
-import axios from '../services/axios'
-import request from '../services/requests'
+// import axios from '../services/axios'
+// import request from '../services/requests'
 // components
 import Login from '../components/signinOut/login'
 import Register from '../components/signinOut/register'
@@ -15,6 +15,7 @@ import { Logo } from '../components/logo'
 // style
 import { ContainerSignOut, ContentImage } from '../styles/ContainerSignOut'
 import Loader from '../components/loader'
+import axios from 'axios'
 
 const RegisterLogin = () => {
   const history = useHistory()
@@ -67,7 +68,7 @@ const RegisterLogin = () => {
         password: formRegister.password
       }
       axios
-        .post(request.fetchRegister, data)
+        .post('http://localhost:5000/api/register', data)
         .then(res => {
           console.log(res)
           setMessageValidate('Votre compte a été bien crée')

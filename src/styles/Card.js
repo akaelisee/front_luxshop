@@ -154,6 +154,10 @@ export const Image = styled.img`
         return `
         width: 100%;
         `
+      } else if (props.account) {
+        return `
+        width: 100%;
+      `
       }
     }}
   }
@@ -165,9 +169,6 @@ export const CardBody = styled.div`
   font-family: 'Poppins', sans-serif;
   font-weight: 300;
   padding-bottom: 20px;
-
-  @media screen and (max-width: 1170px) {
-  }
 `
 
 export default Card

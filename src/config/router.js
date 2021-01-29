@@ -1,5 +1,11 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
-import { BrowserRouter as Router, Switch } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from 'react-router-dom'
 import PrivateRoute from './privateRoute'
 import Home from '../views/home'
 import RegisterLogin from '../views/registerLogin'
@@ -16,61 +22,45 @@ import ProductHim from '../views/productHim'
 import Contact from '../views/contact'
 import Payment from '../views/payment'
 import Success from '../views/success'
+import NoPage from '../views/404'
+import NoLog from '../views/noLog'
+import About from '../views/about'
 
+const WRoute = props => {
+  return props.path === '/' ? (
+    <Route exact path={props.path} component={props.component} />
+  ) : (
+    <>
+      <div className='container'>
+        <Content>
+          <PrivateRoute exact path={props.path} component={props.component} />
+        </Content>
+      </div>
+    </>
+  )
+}
 const Routes = () => {
   return (
     <Router>
       <Switch>
-        <PrivateRoute exact path='/' component={RegisterLogin}></PrivateRoute>
-        <PrivateRoute exact path='/payment' component={Payment}></PrivateRoute>
-        <PrivateRoute exact path='/success' component={Success}></PrivateRoute>
-        {/* <Route path='*' component={NoPage} /> */}
-        {/* <Redirect to='/'></Redirect> */}
-        <Content>
-          <PrivateRoute exact path='/home' component={Home}></PrivateRoute>
-          <PrivateRoute exact path='/chains' component={Chains}></PrivateRoute>
-          <PrivateRoute exact path='/rings' component={Rings}></PrivateRoute>
-          <PrivateRoute
-            exact
-            path='/account'
-            component={Account}
-          ></PrivateRoute>
-          <PrivateRoute
-            exact
-            path='/necklaces'
-            component={Necklaces}
-          ></PrivateRoute>
-          <PrivateRoute
-            exact
-            path='/bracelets'
-            component={Bracelets}
-          ></PrivateRoute>
-          <PrivateRoute
-            exact
-            path='/watches'
-            component={Watches}
-          ></PrivateRoute>
-          <PrivateRoute
-            exact
-            path='/detail/:name/:id'
-            component={Detail}
-          ></PrivateRoute>
-          <PrivateRoute
-            exact
-            path='/looks-for-her'
-            component={ProductHer}
-          ></PrivateRoute>
-          <PrivateRoute
-            exact
-            path='/looks-for-him'
-            component={ProductHim}
-          ></PrivateRoute>
-          <PrivateRoute
-            exact
-            path='/contact'
-            component={Contact}
-          ></PrivateRoute>
-        </Content>
+        <WRoute exact path='/' component={RegisterLogin} />
+        <WRoute exact path='/home' component={Home} />
+        <WRoute exact path='/chains' component={Chains} />
+        <WRoute exact path='/rings' component={Rings} />
+        <WRoute exact path='/account' component={Account} />
+        <WRoute exact path='/necklaces' component={Necklaces} />
+        <WRoute exact path='/bracelets' component={Bracelets} />
+        <WRoute exact path='/watches' component={Watches} />
+        <WRoute exact path='/detail/:name/:id' component={Detail} />
+        <WRoute exact path='/looks-for-her' component={ProductHer} />
+        <WRoute exact path='/looks-for-him' component={ProductHim} />
+        <WRoute exact path='/contact' component={Contact} />
+        <WRoute exact path='/about' component={About} />
+        <Route exact path='/success' component={Success} />
+        <Route exact path='/payment' component={Payment} />
+        <Route path='/noLog' component={NoLog} />
+        <Route path='*' component={NoPage} />
+        <Redirect to='/'></Redirect>
       </Switch>
     </Router>
   )

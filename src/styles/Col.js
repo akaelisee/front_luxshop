@@ -43,6 +43,11 @@ const Col = styled.div`
       }
     }
   }
+  .contact__text {
+    position: absolute;
+    top: 35%;
+    right: 0%;
+  }
   @media screen and (max-width: 850px) {
     .col__text {
       left: 6%;

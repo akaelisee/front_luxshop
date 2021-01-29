@@ -102,11 +102,11 @@ const Wrapper = styled.div`
 
         .rotate__true {
           transition: all 0.2s ease;
-          transform: rotate(0deg);
+          transform: rotate(-180deg);
         }
         .rotate__false {
           transition: all 0.2s ease;
-          transform: rotate(-180deg);
+          transform: rotate(0deg);
         }
       }
     }

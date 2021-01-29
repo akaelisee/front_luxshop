@@ -1,7 +1,10 @@
 /* eslint-disable no-undef */
 // import { useDispatch } from 'react-redux'
-import axios from '../services/axios'
-import request from '../services/requests'
+// import axios from '../services/axios'
+
+import axios from 'axios'
+
+// import request from '../services/requests'
 
 export const POST_LOGIN = 'POST_LOGIN'
 
@@ -13,7 +16,7 @@ export const displayLogin = response => ({
 export const postLogin = userObj => dispatch => {
   return new Promise((resolve, reject) => {
     axios
-      .post(request.fetchLogin, userObj)
+      .post('http://localhost:5000/api/login/', userObj)
       .then(response => {
         dispatch(displayLogin(response.data))
         resolve(response)

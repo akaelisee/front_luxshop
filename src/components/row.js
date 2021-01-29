@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import axios from '../services/axios'
+// import axios from '../services/axios'
 import PropTypes from 'prop-types'
 // component
 import { Loader } from '../components/loader'
@@ -11,6 +11,7 @@ import Container from '../styles/Container'
 import Col from '../styles/Col'
 import Wrapper from '../styles/Wrapper'
 import { Card, Image, CardBody } from '../styles/Card'
+import axios from 'axios'
 
 const Row = ({ title, fetchUrl, banniereImage, secondText, thridText }) => {
   const baseImage = process.env.REACT_APP_BASE_IMAGE

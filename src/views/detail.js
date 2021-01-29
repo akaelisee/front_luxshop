@@ -4,15 +4,15 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
 import { connect } from 'react-redux'
-import axios from '../services/axios'
-import request from '../services/requests'
+// import axios from '../services/axios'
+// import request from '../services/requests'
+import axios from 'axios'
 import { addLibrary, removeLibrary } from '../actions/library'
 import { addCard } from '../actions/cardAction'
 import BtnLibrary from '../components/btn/btnLibrary'
 import BtnCard from '../components/btn/btnCard'
 import Container from '../styles/Container'
 import Wrapper from '../styles/Wrapper'
-// import Rows from '../styles/Rows'
 import Swiper from 'swiper'
 import 'swiper/swiper-bundle.css'
 import Slide from '../components/slide'
@@ -22,6 +22,10 @@ import RowSwiper from '../styles/RowSwiper'
 import ReactNotification from 'react-notifications-component'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
+import Loader from '../components/loader'
+import Livraison from '../components/detailDescription/livraison'
+import Retours from '../components/detailDescription/retours'
+import Paiement from '../components/detailDescription/paiement'
 
 const Detail = ({ library }) => {
   const [product, setProduct] = useState([])
@@ -29,7 +33,7 @@ const Detail = ({ library }) => {
   const [dimension, setDimension] = useState([])
   const [color, setcolor] = useState([])
   const [girth, setgirth] = useState([])
-  const fetchUrl = `${request.fetchProducts}/`
+  const fetchUrl = `http://localhost:5000/api/products/`
   const token = localStorage.getItem('token')
   const param = useParams()
   const [isExistRes, setIsExistRes] = useState(false)
@@ -40,6 +44,8 @@ const Detail = ({ library }) => {
   const [isCard, setIsCard] = useState(false)
   const [choosenColor, setChoosenColor] = useState('')
   const [choosenDimension, setChoosenDimension] = useState('')
+  const [isLoader, setIsLoader] = useState(false)
+
   useEffect(() => {
     axios
       .get(`${fetchUrl}${param?.id || param?._id}`, {
@@ -56,6 +62,7 @@ const Detail = ({ library }) => {
         setChoosenColor(res.data.color[0])
         setgirth(res.data.girth)
         initSwiper()
+        setIsLoader(true)
       })
       .catch(err => {
         console.log(err)
@@ -92,12 +99,16 @@ const Detail = ({ library }) => {
     if (isExist === 1) {
       return <DetailComponent product={product} color={color} girth={girth} />
     } else if (isExist === 2) {
-      console.log(isExist)
+      return <Livraison />
     } else if (isExist === 3) {
-      console.log(isExist)
+      return <Paiement />
     } else if (isExist === 4) {
-      console.log(isExist)
+      return <Retours />
     }
+  }
+
+  if (!isLoader) {
+    return <Loader />
   }
 
   return (
@@ -254,7 +265,7 @@ const Detail = ({ library }) => {
               </span>
             </div>
             {isExistLivraison ? (
-              <DetailComponent product={product} color={color} girth={girth} />
+              <Livraison product={product} color={color} girth={girth} />
             ) : (
               <></>
             )}
@@ -277,7 +288,7 @@ const Detail = ({ library }) => {
               </span>
             </div>
             {isExistPay ? (
-              <DetailComponent product={product} color={color} girth={girth} />
+              <Paiement product={product} color={color} girth={girth} />
             ) : (
               <></>
             )}
@@ -291,7 +302,7 @@ const Detail = ({ library }) => {
               <span> Retours </span>
               <span
                 className={
-                  isExistLivraison
+                  isExistRetours
                     ? 'icon__chevron rotate__true'
                     : 'icon__chevron rotate__false'
                 }
@@ -300,7 +311,7 @@ const Detail = ({ library }) => {
               </span>
             </div>
             {isExistRetours ? (
-              <DetailComponent product={product} color={color} girth={girth} />
+              <Retours product={product} color={color} girth={girth} />
             ) : (
               <></>
             )}

@@ -1,8 +1,8 @@
 // @ts-nocheck
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react'
-// import axios from '../services/axios'
 import axios from 'axios'
+// import axios from '../services/axios'
 // import request from '../services/requests'
 import { useHistory } from 'react-router-dom'
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
@@ -117,7 +117,10 @@ const Checkout = ({ cards, total }) => {
         dispatch(allRemoveCard(cards))
 
         history.push({
-          pathname: '/success'
+          pathname: '/success',
+          state: {
+            alert: confirmPayment.paymentIntent.status
+          }
         })
       }
     } catch (error) {
@@ -201,7 +204,11 @@ const Checkout = ({ cards, total }) => {
               </div>
             </div>
             <div className='btn__checkout'>
-              <button type='submit' disabled={isProcessing}>
+              <button
+                type='submit'
+                className={cards.length == 0 ? 'btn_disibled' : ''}
+                disabled={cards.length == 0 ? true : false}
+              >
                 {buttonMsg}
               </button>
             </div>

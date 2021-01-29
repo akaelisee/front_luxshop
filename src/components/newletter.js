@@ -12,26 +12,45 @@ const Newletter = () => {
   const [formLetter, setFormLetter] = useState({
     email: ''
   })
-  // const [isLenghtEmailExist, setIsLenghtEmailExist] = useState(true)
-  const apiLetter = 'http://localhost:5000/api/subscribe'
+  const [isEmailExist, setIsEmailExist] = useState('')
+  const [isEmailTrue, setIsEmailTrue] = useState('')
+  const [isHide, setIsHide] = useState(false)
+  const fetchUrl = 'http://localhost:5000/api/subscribe'
 
   const handleSubmit = e => {
     e.preventDefault()
     const data = {
       email: formLetter.email
     }
-
+    // aaaaaaa@gmail.com
     try {
       axios
-        .post(apiLetter, data)
+        .post(fetchUrl, data)
         .then(res => {
-          console.log(res.data)
+          setIsEmailTrue(`Abonnement réussi`)
+          setTimeout(() => {
+            setIsEmailTrue('')
+          }, 4000)
+          if (isHide) {
+            setIsHide(false)
+            console.log(res.data)
+          }
         })
         .catch(err => {
-          console.log(err)
+          setIsEmailExist(`L'email que vous avez renseigné existe déjà`)
+          setTimeout(() => {
+            setIsEmailExist('')
+          }, 8000)
+          if (isHide) {
+            setIsHide(false)
+            console.log(err)
+          }
         })
     } catch (error) {
-      console.log(error)
+      if (isHide) {
+        setIsHide(false)
+        console.log(error)
+      }
     }
   }
   const handleScroll = () => {
@@ -51,6 +70,16 @@ const Newletter = () => {
             Recevez les toutes dernières actualités et offres spéciales
             directement dans votre messagerie.
           </span>
+          <div
+            style={{
+              color: '#071120',
+              fontSize: '14px',
+              marginBottom: '0px',
+              marginTop: '10px'
+            }}
+          >
+            {isEmailTrue}
+          </div>
           <form onSubmit={e => handleSubmit(e)}>
             <p className='col'>Adresse e-mail</p>
             <div className='form_email'>
@@ -70,6 +99,16 @@ const Newletter = () => {
               )}
             </div>
           </form>
+          <div
+            style={{
+              color: '#ec2f4d',
+              fontSize: '14px',
+              marginBottom: '6px'
+            }}
+          >
+            {isEmailExist}
+          </div>
+
           <div className='charte'>
             <span>
               En m’abonnant, je confirme (i) être âgé(e) de 16 ans ou plus, (ii)

@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom'
 import { LogoHeader } from '../components/logo'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+
 const Payment = ({ cardReducers }) => {
   const stripePromise = loadStripe(process.env.REACT_APP_KEY)
 
@@ -21,12 +22,15 @@ const Payment = ({ cardReducers }) => {
     })
     return total
   }
+  const retours = () => {
+    window.history.back()
+  }
   return (
     <Container>
       <Nav payment>
         <div className='navbar__payment'>
           <div className='text'>
-            <Link to='/home'>
+            <Link to='' onClick={() => retours()}>
               <FontAwesomeIcon icon={faArrowLeft} />
               <span> Continuer mon Shopping</span>
             </Link>

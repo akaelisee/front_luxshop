@@ -4,12 +4,12 @@ import Row from '../components/row'
 import BannerHim from '../assets/img/businessman-checking-time.jpg'
 
 const ProductHim = () => {
-  const request = 'http://localhost:5000/api/product/genre/him'
+  // const request = 'http://localhost:5000/api/product/genre/him'
   return (
     <div>
       <Row
         title='LOOKS POUR LUI'
-        fetchUrl={request}
+        fetchUrl='http://localhost:5000/api/product/genre/him'
         banniereImage={BannerHim}
       />
     </div>

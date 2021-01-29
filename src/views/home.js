@@ -22,7 +22,7 @@ const Home = () => {
   const [products, setProducts] = useState([])
   const [isLoader, setIsLoader] = useState(false)
   // const fetchUrl = `${request.fetchProducts}`
-  const fetchUrl = `http://localhost:5000/api/products-eight`
+  const fetchUrl = 'http://localhost:5000/api/products-eight'
   const baseImage = process.env.REACT_APP_BASE_IMAGE
   const regex = / /gi
 
@@ -62,9 +62,9 @@ const Home = () => {
               Découvrez nos <br /> montres et accessoires
             </p>
           </div>
-          <div className='btn__explore'>
-            <Link to='/product'> Explorez </Link>
-          </div>
+          {/* <div className='btn__explore'>
+            <Link to='/watches'> Explorez </Link>
+          </div> */}
         </div>
       </Col>
       <Wrapper>

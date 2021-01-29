@@ -105,6 +105,13 @@ const StyleChekout = styled.div`
             align-self: center;
             position: relative;
           }
+          .btn_disibled {
+            background-color: #aaaaaa;
+            color: #fff;
+            outline: none;
+            border: none;
+            cursor: not-allowed;
+          }
         }
       }
     }

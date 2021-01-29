@@ -33,8 +33,51 @@ code {
   /* color: #c8ba7a;  color or */
   /* color: rgba(187, 187, 187, 0.342); */
   /* color: #ec2f4d;  red */
+  /* color: #2fec77; */
 }
 
+.no__page {
+  width: 100%;
+}
+
+.image{
+  position: relative;
+}
+.image img {
+  width: 700px; 
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -1%);
+}
+
+@media screen and (max-width: 710px) {
+  .image img {
+    width: 550px; 
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, 20%);
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .image img {
+    width: 380px; 
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, 50%);
+  }
+}
+
+
+.btn_error {
+  margin: 0 25px;
+  padding: 25px 0;
+  color: #071120;
+  cursor: pointer;
+}
 
 /* Loader */
 .abs {

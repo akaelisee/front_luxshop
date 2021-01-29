@@ -16,6 +16,7 @@ const Jumbotron = styled.div`
       font-weight: 300;
     }
     form {
+      margin: 15px 0 2px 0;
       .col {
         font-size: 12px;
         letter-spacing: 3px;
@@ -23,7 +24,6 @@ const Jumbotron = styled.div`
         font-family: sans-serif;
         margin-bottom: 5px;
       }
-      margin: 15px 0;
       .form_email {
         display: flex;
         input {

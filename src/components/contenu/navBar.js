@@ -135,7 +135,6 @@ const NavBar = ({ isNav, cardReducers }) => {
             </div>
           </Nav>
         )}
-        {cardExist()}
       </div>
       {/* Responsive */}
       <div className='responsive'>
@@ -144,7 +143,7 @@ const NavBar = ({ isNav, cardReducers }) => {
             <div className='nav__bar'>
               <div className='globe'>
                 <span onClick={() => setIsResponsive(true)}>
-                  <FontAwesomeIcon icon={faBars} />{' '}
+                  <FontAwesomeIcon icon={faBars} />
                 </span>
               </div>
               <div className='logo'>
@@ -190,12 +189,24 @@ const NavBar = ({ isNav, cardReducers }) => {
                   </span>
                 </div>
                 <div className='nav__link'>
-                  <Link to='/home'> Accueil </Link>
-                  <Link to='/watches'> Montres </Link>
-                  <Link to='/bracelets'> Bracelets </Link>
-                  <Link to='/rings'> Bagues </Link>
-                  <Link to='/chains'> Boucle d&lsquo;oreilles </Link>
-                  <Link to='/necklaces'> Collier </Link>
+                  <Link to='/home' onClick={() => setIsResponsive(false)}>
+                    Accueil
+                  </Link>
+                  <Link to='/watches' onClick={() => setIsResponsive(false)}>
+                    Montres
+                  </Link>
+                  <Link to='/bracelets' onClick={() => setIsResponsive(false)}>
+                    Bracelets
+                  </Link>
+                  <Link to='/rings' onClick={() => setIsResponsive(false)}>
+                    Bagues
+                  </Link>
+                  <Link to='/chains' onClick={() => setIsResponsive(false)}>
+                    Boucle d&lsquo;oreilles
+                  </Link>
+                  <Link to='/necklaces' onClick={() => setIsResponsive(false)}>
+                    Collier
+                  </Link>
                 </div>
               </NavLink>
             ) : (
@@ -203,8 +214,8 @@ const NavBar = ({ isNav, cardReducers }) => {
             )}
           </div>
         </Nav>
-        {cardExist()}
       </div>
+      {cardExist()}
       {/* Responsive */}
     </>
   )
