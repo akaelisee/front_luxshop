@@ -2,13 +2,10 @@
 import React, { useState } from 'react'
 import Banniere from '../styles/Banniere'
 import BanniereContact from '../assets/img/conatct.jpg'
-import axios from 'axios'
 import StyleContact from '../styles/StyleContact'
-// import axios from '../services/axios'
-// import request from '../services/requests'
+import axios from '../services/axios'
+import request from '../services/requests'
 // service
-// import axios from '../services/axios'
-// import request from '../services/requests'
 const Contact = () => {
   const [formContact, setFormContact] = useState({
     firstname: '',
@@ -16,7 +13,6 @@ const Contact = () => {
     email: '',
     text: ''
   })
-  const fetchUrl = 'http://localhost:5000/api/add/contact'
   const [isContactMsg, setIsContactMsg] = useState('')
 
   const HandleSubmit = e => {
@@ -30,7 +26,7 @@ const Contact = () => {
         text: formContact.text
       }
       axios
-        .post(fetchUrl, data)
+        .post(request.fetchContact, data)
         .then(res => {
           setIsContactMsg('Message envoyé')
           console.log(res)

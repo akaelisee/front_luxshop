@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React from 'react'
 import Row from '../components/row'
-// import request from '../services/requests'
+import request from '../services/requests'
 import banniereRings from '../assets/img/wedding.jpg'
 
 const Rings = () => {
@@ -9,7 +9,7 @@ const Rings = () => {
     <div>
       <Row
         title='Bagues'
-        fetchUrl='http://localhost:5000/api/rings'
+        fetchUrl={request.fetchRings}
         banniereImage={banniereRings}
       />
     </div>

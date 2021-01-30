@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React from 'react'
 import Row from '../components/row'
-// import request from '../services/requests'
+import request from '../services/requests'
 import banniereWatches from '../assets/img/watch.jpg'
 
 const Watches = () => {
@@ -11,7 +11,7 @@ const Watches = () => {
     <div>
       <Row
         title='TOUTES LES MONTRES'
-        fetchUrl='http://localhost:5000/api/watches'
+        fetchUrl={request.fetchWatches}
         banniereImage={banniereWatches}
         secondText={secondText}
         thridText={thridText}

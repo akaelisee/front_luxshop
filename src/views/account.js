@@ -1,6 +1,6 @@
 // @ts-nocheck
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
@@ -14,9 +14,7 @@ const Account = ({ login, library }) => {
   const baseImage = process.env.REACT_APP_BASE_IMAGE
   const regex = / /gi
   const dispatch = useDispatch()
-  useEffect(() => {
-    // console.log()
-  }, [])
+
   return (
     <Container detail>
       <Wrapper>

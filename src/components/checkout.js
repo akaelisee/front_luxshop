@@ -1,9 +1,8 @@
 // @ts-nocheck
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react'
-import axios from 'axios'
-// import axios from '../services/axios'
-// import request from '../services/requests'
+import axios from '../services/axios'
+import request from '../services/requests'
 import { useHistory } from 'react-router-dom'
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
 import { allRemoveCard } from '../actions/cardAction'
@@ -65,7 +64,7 @@ const Checkout = ({ cards, total }) => {
     try {
       // Got our client secret
       const paymentIntent = await axios.post(
-        'http://localhost:5000/api/payment',
+        request.fetchPayment,
         {
           // @ts-ignore
           amount: total() * 100,

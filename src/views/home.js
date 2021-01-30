@@ -2,9 +2,8 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import axios from 'axios'
-// import axios from '../services/axios'
-// import request from '../services/requests'
+import axios from '../services/axios'
+import request from '../services/requests'
 // component
 import { Loader } from '../components/loader'
 // style
@@ -21,8 +20,7 @@ import banniereImg from '../assets/img/home.jpg'
 const Home = () => {
   const [products, setProducts] = useState([])
   const [isLoader, setIsLoader] = useState(false)
-  // const fetchUrl = `${request.fetchProducts}`
-  const fetchUrl = 'http://localhost:5000/api/products-eight'
+  const fetchUrl = `${request.fetchProductLimit}`
   const baseImage = process.env.REACT_APP_BASE_IMAGE
   const regex = / /gi
 

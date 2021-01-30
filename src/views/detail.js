@@ -4,9 +4,8 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
 import { connect } from 'react-redux'
-// import axios from '../services/axios'
-// import request from '../services/requests'
-import axios from 'axios'
+import axios from '../services/axios'
+import request from '../services/requests'
 import { addLibrary, removeLibrary } from '../actions/library'
 import { addCard } from '../actions/cardAction'
 import BtnLibrary from '../components/btn/btnLibrary'
@@ -33,7 +32,6 @@ const Detail = ({ library }) => {
   const [dimension, setDimension] = useState([])
   const [color, setcolor] = useState([])
   const [girth, setgirth] = useState([])
-  const fetchUrl = `http://localhost:5000/api/products/`
   const token = localStorage.getItem('token')
   const param = useParams()
   const [isExistRes, setIsExistRes] = useState(false)
@@ -48,7 +46,7 @@ const Detail = ({ library }) => {
 
   useEffect(() => {
     axios
-      .get(`${fetchUrl}${param?.id || param?._id}`, {
+      .get(`${request.fetchProducts}/${param?.id || param?._id}`, {
         headers: {
           'auth-token': token
         }
@@ -61,13 +59,13 @@ const Detail = ({ library }) => {
         setcolor(res.data.color)
         setChoosenColor(res.data.color[0])
         setgirth(res.data.girth)
-        initSwiper()
         setIsLoader(true)
+        initSwiper()
       })
       .catch(err => {
         console.log(err)
       })
-  }, [fetchUrl])
+  }, [request.fetchProducts])
 
   const initSwiper = () => {
     new Swiper('.swiper-container', {
@@ -117,7 +115,7 @@ const Detail = ({ library }) => {
       <Wrapper detail>
         <RowSwiper>
           <div className='rows__swiper'>
-            <Slide poster={poster} />
+            <Slide poster={poster} initSwiper={initSwiper} />
           </div>
 
           <div className='row__description'>

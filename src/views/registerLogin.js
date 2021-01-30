@@ -4,8 +4,8 @@ import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { postLogin } from '../actions/login'
 // service
-// import axios from '../services/axios'
-// import request from '../services/requests'
+import axios from '../services/axios'
+import request from '../services/requests'
 // components
 import Login from '../components/signinOut/login'
 import Register from '../components/signinOut/register'
@@ -15,7 +15,6 @@ import { Logo } from '../components/logo'
 // style
 import { ContainerSignOut, ContentImage } from '../styles/ContainerSignOut'
 import Loader from '../components/loader'
-import axios from 'axios'
 
 const RegisterLogin = () => {
   const history = useHistory()
@@ -26,6 +25,7 @@ const RegisterLogin = () => {
   const [errorMessageChamps, setErrorMessageChamps] = useState('')
   const [messageValidate, setMessageValidate] = useState('')
   const [isLoader, setIsLoader] = useState(false)
+  const [isHide, setIsHide] = useState(false)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -68,17 +68,22 @@ const RegisterLogin = () => {
         password: formRegister.password
       }
       axios
-        .post('http://localhost:5000/api/register', data)
+        .post(request.fetchRegister, data)
         .then(res => {
-          console.log(res)
           setMessageValidate('Votre compte a été bien crée')
           setIsExist(false)
+          if (isHide) {
+            setIsHide(false)
+            console.log(res)
+          }
         })
         .catch(err => {
-          console.log(err)
           setErrorMessageEmail(
             'Veuillez vous connecter avec le compte que vous avez déjà créé.'
           )
+          if (isHide) {
+            console.log(err)
+          }
         })
     } catch (error) {
       console.log(error)
@@ -105,15 +110,17 @@ const RegisterLogin = () => {
       // Logger User Redux
       dispatch(postLogin(data))
         .then(res => {
-          setIsLoader(true)
           localStorage.setItem('token', res.headers['auth-token'])
           history.push({
             pathname: '/home'
           })
+          setIsLoader(true)
         })
         .catch(err => {
           setErrorMessageLogin('Email ou mot de passe incorrect')
-          console.log(err)
+          if (isHide) {
+            console.log(err)
+          }
         })
     } catch (error) {
       console.log(error)
@@ -142,9 +149,9 @@ const RegisterLogin = () => {
     }
   }
 
-  // if (isLoader) {
-  //   return
-  // }
+  if (isLoader) {
+    return
+  }
 
   return !isLoader ? (
     <ContainerSignOut>

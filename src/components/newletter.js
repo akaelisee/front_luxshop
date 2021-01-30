@@ -1,8 +1,9 @@
 // @ts-nocheck
 import React, { useState } from 'react'
-import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
+import axios from '../services/axios'
+import request from '../services/requests'
 // component
 import SkillsLink from './skillsLink'
 // style
@@ -15,17 +16,15 @@ const Newletter = () => {
   const [isEmailExist, setIsEmailExist] = useState('')
   const [isEmailTrue, setIsEmailTrue] = useState('')
   const [isHide, setIsHide] = useState(false)
-  const fetchUrl = 'http://localhost:5000/api/subscribe'
 
   const handleSubmit = e => {
     e.preventDefault()
     const data = {
       email: formLetter.email
     }
-    // aaaaaaa@gmail.com
     try {
       axios
-        .post(fetchUrl, data)
+        .post(request.fetchNewletter, data)
         .then(res => {
           setIsEmailTrue(`Abonnement réussi`)
           setTimeout(() => {
