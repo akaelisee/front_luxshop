@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { useHistory } from 'react-router-dom'
 import Header from './header'
 import Footer from './footer'
-import Newletter from '../newletter'
+// import Newletter from '../newletter'
 import styled from 'styled-components'
 const Content = ({ children }) => {
   const history = useHistory()
@@ -13,14 +13,14 @@ const Content = ({ children }) => {
     if (!token) history.push('/')
   }, [])
   return (
-    <ConatinerPage>
+    <ContainerPage>
       <div className='container__limit'>
         <Header />
         {children}
       </div>
-      <Newletter />
+      {/* <Newletter /> */}
       <Footer />
-    </ConatinerPage>
+    </ContainerPage>
   )
 }
 
@@ -30,7 +30,7 @@ Content.propTypes = {
 
 export default Content
 
-const ConatinerPage = styled.div`
+const ContainerPage = styled.div`
   .container__limit {
     min-height: calc(100vh - 400px);
   }

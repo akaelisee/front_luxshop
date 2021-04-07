@@ -7,11 +7,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={props => {
-        return localStorage.getItem('token') ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to='/noLog' />
-        )
+        return <Component {...props} />
       }}
     />
   )

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const FormOut = styled.div`
-  margin-top: 35px;
+  margin-top: 28px;
   width: 100%;
   .form-group {
     padding: 5px 0;

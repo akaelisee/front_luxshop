@@ -1,109 +1,111 @@
 import styled from 'styled-components'
 
 const Col = styled.div`
-  position: relative;
-  z-index: 2;
-  .col__text {
-    position: absolute;
-    top: 35%;
-    left: 13%;
-    .text {
-      font-size: 45px;
+  display: grid;
+  gap: 7rem;
+  grid-template-columns: 1fr 1fr;
+  margin: 25px 0 100px 0;
+  .left {
+    position: relative;
+
+    .title {
+      position: absolute;
+      top: 15%;
+      left: -40px;
+      font-size: 28px;
+      font-weight: 500;
       color: #fff;
       text-transform: uppercase;
-      line-height: 56px;
-      letter-spacing: 5px;
-      margin-bottom: 15px;
     }
-    .sous__text {
-      font-size: 25px;
-      color: rgba(255, 255, 255, 0.904);
-      text-transform: uppercase;
-      text-align: center;
-      margin-bottom: 35px;
-      line-height: 30px;
-      letter-spacing: 1.8px;
-    }
-    .btn__explore {
-      text-align: center;
+
+    .btn {
+      padding-top: 60px;
+      position: absolute;
+      bottom: 25px;
+      right: 10px;
       a {
-        color: #fff;
+        padding: 10px 35px;
         border: 1px solid #fff;
-        border-radius: 3px;
-        padding: 6px 55px;
         text-decoration: none;
+        color: #fff;
+        font-size: 18px;
         text-transform: uppercase;
-        transition: all 0.4s ease;
-        letter-spacing: 2px;
+        font-weight: 600;
 
         &:hover {
-          background-color: rgba(68, 84, 109, 0.844);
-          border: 1px solid rgba(68, 84, 109, 0.844);
-        }
-      }
-    }
-  }
-  .contact__text {
-    position: absolute;
-    top: 35%;
-    right: 0%;
-  }
-  @media screen and (max-width: 850px) {
-    .col__text {
-      left: 6%;
-      .text {
-        font-size: 35px;
-      }
-      .sous__text {
-        font-size: 20px;
-      }
-      .btn__explore {
-        a {
-          padding: 6px 40px;
-        }
-      }
-    }
-  }
-  @media screen and (max-width: 650px) {
-    .col__text {
-      position: absolute;
-      top: 35%;
-      left: 5%;
-      .text {
-        font-size: 25px;
-        line-height: 40px;
-      }
-      .sous__text {
-        font-size: 18px;
-        margin-bottom: 20px;
-        line-height: 30px;
-      }
-      .btn__explore {
-        text-align: center;
-        a {
-          padding: 6px 30px;
+          background-color: #fff;
+          transition: all 0.4s ease;
+          color: #000;
         }
       }
     }
   }
 
-  @media screen and (max-width: 430px) {
-    .col__text {
-      .text {
-        font-size: 18px;
-        letter-spacing: 1px;
+  @media screen and (max-width: 1310px) {
+    gap: 4rem;
+    .left {
+      .title {
+        left: -40px;
+        font-size: 25px;
       }
-      .sous__text {
-        font-size: 14px;
-        margin-bottom: 20px;
-        line-height: 30px;
-      }
-      .btn__explore {
+
+      .btn {
         a {
-          padding: 6px 25px;
+          font-size: 16px;
+          padding: 10px 20px;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 1010px) {
+    gap: 3rem;
+    .left {
+      .title {
+        left: -15px;
+        font-size: 22px;
+      }
+
+      .btn {
+        a {
+          font-size: 14px;
+          padding: 10px 20px;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 860px) {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    .left {
+      margin-bottom: 25px;
+      .title {
+        left: -25px;
+        font-size: 25px;
+      }
+
+      .btn {
+        a {
           font-size: 15px;
-          background-color: rgba(68, 84, 109, 0.844);
-          border: 1px solid rgba(68, 84, 109, 0.844);
+          padding: 10px 20px;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    .left {
+      .title {
+        left: -20px;
+        font-size: 22px;
+      }
+
+      .btn {
+        a {
+          font-size: 14px;
+          padding: 10px 15px;
         }
       }
     }

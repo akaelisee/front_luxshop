@@ -1,137 +1,58 @@
 // @ts-nocheck
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import axios from '../services/axios'
-import request from '../services/requests'
+import PropTypes from 'prop-types'
 // component
-import { Loader } from '../components/loader'
+import RowSalle from '../components/rowSalle'
+import Row from '../components/row'
 // style
-import { Banniere, Banner } from '../styles/Banniere'
 import Col from '../styles/Col'
 import Wrapper from '../styles/Wrapper'
-import Rows from '../styles/Rows'
-import { Card, Image, CardBody } from '../styles/Card'
+import { Image } from '../styles/Card'
 // image
-import Her from '../assets/img/heere.jpg'
-import Him from '../assets/img/himee.jpg'
-import banniereImg from '../assets/img/home.jpg'
+import salle5 from '../assets/img/salle5.jpg'
+import salle2 from '../assets/img/salle3.jpg'
 
 const Home = () => {
-  const [products, setProducts] = useState([])
-  const [isLoader, setIsLoader] = useState(false)
-  const fetchUrl = `${request.fetchProductLimit}`
-  const baseImage = process.env.REACT_APP_BASE_IMAGE
-  const regex = / /gi
+  const fetchUrl = 'http://localhost:4000/admin/account/programmes-json'
+  const fetchUrlSalle = 'http://localhost:4000/admin/account/salles-json'
 
-  useEffect(() => {
-    const token = localStorage.getItem('token')
-    axios
-      .get(fetchUrl, {
-        headers: {
-          'auth-token': token
-        }
-      })
-      .then(res => {
-        setProducts(res.data.result)
-        setIsLoader(true)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }, [fetchUrl])
-
-  if (!isLoader) {
-    return <Loader />
-  }
+  useEffect(() => {}, [])
 
   return (
     <Container>
-      <Col>
-        <Banniere url={`url(${banniereImg})`} alt='banierre' />
-        <div className='col__text'>
-          <div className='text'>
-            <p>
-              Apportez la touche <br /> finale à votre look
-            </p>
-          </div>
-          <div className='sous__text'>
-            <p>
-              Découvrez nos <br /> montres et accessoires
-            </p>
-          </div>
-          {/* <div className='btn__explore'>
-            <Link to='/watches'> Explorez </Link>
-          </div> */}
-        </div>
-      </Col>
+      <div style={{ padding: '10px 0' }}></div>
+      <RowSalle fetchUrl={fetchUrlSalle} />
       <Wrapper>
-        <div className='wrapper__btn'>
-          <Link to='/watches'> Montres </Link>
-          <Link to='/bracelets'> Bracelets</Link>
-          <Link to='/rings'> Bagues </Link>
-          <Link to='/necklaces'> Colliers </Link>
-        </div>
-
-        <div className='wrapper__title'>
-          <p> CELLE QUI VOUS CORRESPOND PARFAITEMENT </p>
-        </div>
-
-        <Card>
-          {products.map(product => (
-            <div className='card__product' key={product.id}>
-              <Link
-                to={`/detail/${product.title
-                  .replace(regex, '-')
-                  .toLowerCase()}}/${product.id}`}
-              >
-                <div className='card__image'>
-                  <Image src={`${baseImage}${product.backdrop_path}`} />
-                </div>
-                <CardBody>
-                  <div className='card__title'>
-                    <span> {product.title}</span>
-                  </div>
-                  <div className='cord__text'>
-                    <p>{product.color[0]}</p>
-                    <span> {product.price} € </span>
-                  </div>
-                </CardBody>
-              </Link>
-            </div>
-          ))}
-        </Card>
-
-        <Rows>
-          <div className='col__her'>
-            <Banner url={`url(${Her})`} />
-            <div className='her__looks'>
-              <span>
-                Looks <br /> Pour elle
-              </span>
-              <div className='btn__her'>
-                <Link to='/looks-for-her'> Découvrir </Link>
-              </div>
+        <Col>
+          <div className='left'>
+            <Image home src={salle2} className='img-responsive' alt='Image' />
+            <span className='title'> Visite generale </span>
+            <div className='btn'>
+              <Link to=''>Information Film</Link>
             </div>
           </div>
-          <div className='col__him'>
-            <Banner url={`url(${Him})`} />
-            <div className='him__looks'>
-              <span>
-                Looks <br /> Pour lui
-              </span>
-              <div className='btn__him'>
-                <Link to='/looks-for-him'> Découvrir </Link>
-              </div>
+          <div className='left'>
+            <Image home src={salle5} className='img-responsive' alt='Image' />
+            <span className='title'> Visite generale </span>
+            <div className='btn'>
+              <Link to=''>Information Reservation</Link>
             </div>
           </div>
-        </Rows>
+        </Col>
       </Wrapper>
-      <div></div>
+      <Row title='Future Cinema' fetchUrl={fetchUrl} />
     </Container>
   )
 }
 
+Home.propTypes = {
+  login: PropTypes.object
+}
+
 export default Home
 
-const Container = styled.div``
+const Container = styled.div`
+  padding: 90px 0;
+`

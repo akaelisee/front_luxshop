@@ -76,7 +76,7 @@ const NavLink = styled.div`
     }
   }}
 
-  @media screen and (max-width: 850px) {
+  @media screen and (max-width: 860px) {
     padding: 10px;
     position: fixed;
     top: 0;
@@ -87,12 +87,12 @@ const NavLink = styled.div`
     background-color: rgba(7, 17, 32, 0.878);
 
     .nav__responsive {
-      padding: 5px 0;
+      padding: 10px 0;
       text-align: left;
       .close__responsive {
-        font-size: 30px;
+        font-size: 20px;
         color: #fff;
-        margin-left: 45px;
+        margin-left: 55px;
         cursor: pointer;
       }
     }

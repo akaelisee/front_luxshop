@@ -2,10 +2,25 @@
 import styled from 'styled-components'
 
 const Container = styled.div`
+  padding: 90px 0;
+
+  /* .title {
+    color: #fff;
+    margin
+  } */
+
   ${props => {
-    if (props.newLetter) {
+    if (props.second) {
       return `
-      background: linear-gradient(to right, #2c5364, #203a43, #0f2027); 
+        padding: 0px 0;
+      `
+    } else if (props.newLetter) {
+      return `
+      padding: 0px 0;
+      background: #2C3E50;  /* fallback for old browsers */
+      background: -webkit-linear-gradient(to left, #4CA1AF, #2C3E50);  /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to left, #4CA1AF, #2C3E50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
       position: relative;
       
       .btn__top{
@@ -36,22 +51,8 @@ const Container = styled.div`
       background: transparent; 
     }
       `
-    } else if (props.detail) {
-      return `
-        padding-top: 125px;
-      `
     }
   }}
-
-  @media screen and (max-width: 600px) {
-    ${props => {
-      if (props.detail) {
-        return `
-        padding-top: 75px;
-      `
-      }
-    }}
-  }
 `
 
 export default Container

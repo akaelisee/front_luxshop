@@ -4,166 +4,75 @@ import styled from 'styled-components'
 export const Card = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  column-gap: 13px;
+  column-gap: 2rem;
   row-gap: 30px;
-  .card__product {
-    transition: all 0.2s ease-in-out;
-    ${props => {
-      if (props.account) {
-        return `
-      `
-      }
-    }}
 
-    &:hover {
-      box-shadow: 0px 3px 6px 2px #aaa;
-    }
-
-    a {
-      color: #000;
-      text-decoration: none;
-    }
-    .card__image {
-      background-color: #f5f5f5;
+  .card__movie {
+    .card__container {
       position: relative;
-      padding: 130px;
-      ${props => {
-        if (props.account) {
-          return `
-          padding: 115px;
-      `
+      transition: all 0.2s ease-in-out;
+
+      .card__espace__image {
+        position: relative;
+        width: 100%;
+        margin: 0 auto;
+        .card__image {
+          width: 100%;
         }
-      }}
+      }
     }
-    .card__body {
-      padding: 5px 0px 5px 10px;
+    .movie__title {
+      font-size: 23px;
+      text-transform: uppercase;
     }
-    .btn__delete {
-      padding: 0px 0px 5px 10px;
-      span {
-        cursor: pointer;
-        svg {
-          color: red;
-        }
-        &:hover {
-          text-decoration: underline;
-        }
+  }
+
+  @media screen and (max-width: 1310px) {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    column-gap: 3rem;
+
+    .card__movie {
+      .movie__title {
+        font-size: 18px;
       }
     }
   }
 
-  @media screen and (max-width: 1170px) {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    column-gap: 10px;
-    .card__product {
-      .card__image {
-        padding: 100px;
-      }
-    }
-  }
-  @media screen and (max-width: 760px) {
+  @media screen and (max-width: 1110px) {
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    column-gap: 15px;
-    .card__product {
-      .card__image {
-        padding: 80px 0;
+    column-gap: 1rem;
+  }
+
+  @media screen and (max-width: 860px) {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    column-gap: 1rem;
+
+    .card__movie {
+      .movie__title {
+        font-size: 16px;
       }
     }
-  }
-  @media screen and (max-width: 640px) {
-    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-  }
-  @media screen and (max-width: 420px) {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   }
 `
 
 export const Image = styled.img`
-  width: 260px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 90%;
+
   ${props => {
-    if (props.post) {
+    if (props.home) {
       return `
-        width: 100%;
+      width: 100%;
+      height: 100%;
       `
     } else if (props.slide) {
       return `
-        width: 65%;
-      `
-    } else if (props.account) {
-      return `
-        width: 190px;
+       width: 90%;
+      height: 600px;
       `
     }
   }}
-
-  @media screen and (max-width: 1170px) {
-    width: 200px;
-    ${props => {
-      if (props.post) {
-        return `
-        width: 100%;
-      `
-      } else if (props.slide) {
-        return `
-        width: 65%;
-      `
-      } else if (props.account) {
-        return `
-        width: 190px;
-      `
-      }
-    }}
-  }
-
-  @media screen and (max-width: 960px) {
-    ${props => {
-      if (props.slide) {
-        return `
-        width: 100%;
-        `
-      }
-    }}
-  }
-
-  @media screen and (max-width: 760px) {
-    width: 140px;
-    ${props => {
-      if (props.post) {
-        return `
-        width: 100%;
-      `
-      } else if (props.slide) {
-        return `
-        width: 100%;
-      `
-      } else if (props.account) {
-        return `
-        width: 190px;
-      `
-      }
-    }}
-  }
-
-  @media screen and (max-width: 600px) {
-    ${props => {
-      if (props.slide) {
-        return `
-        width: 100%;
-        `
-      } else if (props.account) {
-        return `
-        width: 100%;
-      `
-      }
-    }}
-  }
 `
 export const CardBody = styled.div`
-  /* height: 100px; */
   padding-top: 5px;
   padding-left: 6px;
   font-family: 'Poppins', sans-serif;
